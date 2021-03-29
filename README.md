@@ -9,7 +9,7 @@
 | [강세미](https://github.com/semi-cloud) | 조원 |
 | [유서정](https://github.com/seojung87) | 조원 |
 | [임지민](https://github.com/jimin3263) | 조원 |
-| [최아름]() | 조원 |
+| [최아름](https://github.com/areum17) | 조원 |
 
 <br>
 
