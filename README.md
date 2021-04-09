@@ -56,7 +56,7 @@
 
 ## Notion 회의록 정리
 
-#### 요구사항 명세서 작성
+#### - 요구사항 명세서 작성
 > [2021-04-02](https://www.notion.so/2021-04-02-b29888c2bc1a4325bfeed7c2b2cbc7cf)  
 > [2021-04-05](https://www.notion.so/2021-04-05-2429bf49089d4ad8bcb1691bfb918408)  
 > [2021-04-08](https://www.notion.so/2021-04-08-94850c22f9054cdc9e6f4af9b93d6b43)  
