@@ -11,6 +11,10 @@
 | [임지민](https://github.com/jimin3263) | 조원, BackEnd |
 | [최아름](https://github.com/areum17) | 조원, FrontEnd |
 
+### 🔗 바로 가기
+> [요구사항 명세서](https://github.com/LAH1203/Software_Engineering_Project/blob/main/1.%20%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%20%EB%AA%85%EC%84%B8%EC%84%9C/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%20%EB%AA%85%EC%84%B8%EC%84%9C_Campers'_ver1.3.zip)  
+> [프로젝트 계획서](https://github.com/LAH1203/Software_Engineering_Project/blob/main/2.%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B3%84%ED%9A%8D%EC%84%9C/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B3%84%ED%9A%8D%EC%84%9C_Campers'_ver1.1.doc)
+
 <br>
 
 ## 프로젝트 소개
@@ -51,6 +55,7 @@
 | 2021-04-02 | - 요구사항 명세서 작성<br>- 구현 기술 정하기 | 강세미, 유서정, 이아현, 임지민, 최아름 |
 | 2021-04-05 | - 요구사항 명세서 작성 | 강세미, 유서정, 이아현, 임지민, 최아름 |
 | 2021-04-08 | - 요구사항 명세서 작성 | 강세미, 유서정, 이아현, 임지민, 최아름 |
+| 2021-04-16 | - 프로젝트 계획서 작성 | 강세미, 유서정, 이아현, 임지민, 최아름 |
 
 <br>
 
@@ -60,3 +65,6 @@
 > [2021-04-02](https://www.notion.so/2021-04-02-b29888c2bc1a4325bfeed7c2b2cbc7cf)  
 > [2021-04-05](https://www.notion.so/2021-04-05-2429bf49089d4ad8bcb1691bfb918408)  
 > [2021-04-08](https://www.notion.so/2021-04-08-94850c22f9054cdc9e6f4af9b93d6b43)  
+
+#### - 프로젝트 계획서 작성
+> [2021-04-16](https://www.notion.so/2021-04-16-e7ce44f3e1964d5c980ecbd4b4bf11b6)  
