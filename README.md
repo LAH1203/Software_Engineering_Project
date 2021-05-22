@@ -12,7 +12,7 @@
 | [최아름](https://github.com/areum17) | 조원, FrontEnd |
 
 ### 🔗 바로 가기 (최신 ver)
-> [요구사항 명세서](https://github.com/LAH1203/Software_Engineering_Project/blob/main/1.%20%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%20%EB%AA%85%EC%84%B8%EC%84%9C/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%20%EB%AA%85%EC%84%B8%EC%84%9C_Campers'_ver1.5.docx)  
+> [요구사항 명세서](https://github.com/LAH1203/Software_Engineering_Project/blob/main/1.%20%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%20%EB%AA%85%EC%84%B8%EC%84%9C/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%20%EB%AA%85%EC%84%B8%EC%84%9C_Campers'_ver1.6.docx)  
 > [프로젝트 계획서](https://github.com/LAH1203/Software_Engineering_Project/blob/main/2.%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B3%84%ED%9A%8D%EC%84%9C/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EA%B3%84%ED%9A%8D%EC%84%9C_Campers'_ver1.4.docx)  
 > [중간 발표영상](https://www.youtube.com/watch?v=FuaIqX4x1Fs)   
 > [중간 발표자료](https://github.com/LAH1203/Software_Engineering_Project/blob/main/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EA%B3%B5%ED%95%99_%EC%A4%91%EA%B0%84%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pdf)
@@ -60,7 +60,7 @@
 | 2021-04-16 | - 프로젝트 계획서 작성 | // |
 | 2021-04-24 | - 중간 발표 수정 회의 | // |
 | 2021-05-21 | - 설계 회의 | // |
-| 2021-05-22 | - 설계 및 구현 회의 |  |
+| 2021-05-22 | - 설계 및 구현 회의 | // |
 
 <br>
 
