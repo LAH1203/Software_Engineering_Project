@@ -1,0 +1,28 @@
+doctype html 
+html 
+    head 
+        meta(charset='utf-8')
+        title Reservation 
+        script(src='/reservation.js') 
+        script(src='jquery-2.2.4.min.js')
+    body 
+        form(name='reservation_form' action='/reservation' method='post')
+            label 입실 날짜
+            input(type='date' id='startDay' class='date' name='startDay' onchange='calculateDay(); calculatePrice();' required)
+            label 퇴실 날짜
+            input(type='date' id='endDay' class='date' name='endDay' onchange='calculateDay(); calculatePrice();' required)
+            br
+            input(type='text' id='totalDay' name='totalDay' value='0' readonly)
+            label 박
+            input(type='number' id='people' name='people' onchange='calculatePrice();' required)
+            label 명
+            br
+            br
+            label 결제 금액 : 
+            input(type='text' id='price' name='price' value='0' readonly)
+            br
+            br
+            select(id='paymentSubject')
+                option(selected='selected') 현장결제
+                option 무통장입금
+            button(type='submit') 예약하기

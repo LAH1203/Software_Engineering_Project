@@ -42,6 +42,7 @@ app.get('/add-user', (req,res) => {
         
 })
 */
+
 // 메인(검색) 화면
 app.get(['/', '/main'], function(req, res) {
     // 데이터베이스에서 캠핑장 정보 뽑아와주세요~
@@ -101,6 +102,18 @@ app.get('/setcampinfo', function(req, res) {
 // 상세정보 화면
 app.get('/camp', function(req, res) {
 
+});
+
+// 예약 화면
+app.get('/reservation', function(req, res) {
+    res.render('reservation_page');
+});
+
+app.post('/reservation', function(req, res) {
+    var totalDay = req.body.totalDay;
+    var people = req.body.people;
+    var price = req.body.price;
+    res.render('reservation_complete_page', { totalDay: totalDay, people: people, price: price });
 });
 
 app.listen(app.get('port'), function() {
