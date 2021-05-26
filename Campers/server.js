@@ -1,8 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 var app = express();
 
+//connect to mongodb
+const dbUri = 'mongodb+srv://semi:1111@cluster0.r5t31.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+mongoose.connect(dbUri,{useNewUrlParser: true, useUnifiedTopology:true})
+    .then((result)=> console.log('connect to  db'))
+    .catch((err) => console.log(err));
+    
 app.locals.pretty = true;
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
