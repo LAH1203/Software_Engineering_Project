@@ -21,7 +21,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // 메인(검색) 화면
 app.get(['/', '/main'], function(req, res) {
+    // 데이터베이스에서 캠핑장 정보 뽑아와주세요~
+    let camp_name = ['아름이네 캠핑장', '서정이네 캠핑장', '지민이네 캠핑장', '세미네 캠핑장', '아현이네 캠핑장'];
+    let camp_id = [1, 2, 3, 4, 5];
+    res.render('main_page', { camp_name: camp_name, camp_id: camp_id });
+});
 
+app.post('/main', function(req, res) {
+    let search = req.body.search;
+    // 여기에서 search 검색어를 바탕으로 검색 수행해주시면 됩니다!
 });
 
 // 로그인 화면
@@ -29,8 +37,16 @@ app.get('/login', function(req, res) {
 
 });
 
+app.post('/login', function(req, res) {
+    
+});
+
 // 회원가입 화면
 app.get('/signup', function(req, res) {
+
+});
+
+app.post('/signup', function(req, res) {
 
 });
 
