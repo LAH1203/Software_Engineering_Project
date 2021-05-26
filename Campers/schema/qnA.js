@@ -3,24 +3,24 @@ const Schema = mongoose.Schema;
 
 const QnASchema = new Schema({
     QnA_id: {
-        type:Int,
+        type: Number,
         required:true,
         unique: true
     },
     Writer_email: {
-        type:String,
+        type: String,
         required:true
     },
     Campground_name: {
-        type:String,
+        type: String,
         required:true
     },
     Writing_date: {
-        type:Date,
+        type: Date,
         required:true
     },
     Public_check: {
-        type:Boolean,
+        type: Boolean,
         required:true
     },
     Writing_content: {

@@ -1,22 +1,24 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const imgSchema = new Schema({
+    width: Number,
+    height: Number
+});
+
 const ReviewSchema = new Schema({
     Writer_email: {
-        type:String,
+        type: String,
         required:true,
         unique: true
     },
     Campground_name: {
-        type:String,
+        type: String,
         required:true
     },
-    Image: {
-        type:Image,
-        required:true
-    },
+    Image: imgSchema,
     Star_point: {
-        type:Double,
+        type: Number,
         required:true
     },
     Writing_content: {

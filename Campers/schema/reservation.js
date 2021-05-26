@@ -3,20 +3,20 @@ const Schema = mongoose.Schema;
 
 const ReservationSchema = new Schema({
     Reservation_email: {
-        type:String,
+        type: String,
         required:true,
         unique: true
     },
     Campground_name: {
-        type:String,
+        type: String,
         required:true
     },
     Reservation_date: {
-        type:Date,
+        type: Date,
         required:true
     },
     Number_of_people: {
-        type:Int,
+        type: Number,
         required:true
     },
     Approval_date: {
@@ -29,5 +29,5 @@ const ReservationSchema = new Schema({
     }
 });
 
-const Reservation = mongoose.model('Reservation', ReseravtionSchema );
+const Reservation = mongoose.model('Reservation', ReservationSchema );
 module.exports = Reservation;

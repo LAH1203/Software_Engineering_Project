@@ -3,24 +3,24 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     Email: {
-        type:String,
+        type: String,
         required:true,
         unique: true
     },
     Password: {
-        type:String,
+        type: String,
         required:true
     },
     Name: {
-        type:String,
+        type: String,
         required:true
     },
     Phone_number: {
-        type:String,
+        type: String,
         required:true
     },
     Mode: {
-        type: int,
+        type: Number,
         required:true
     }
 });
