@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ReviewSchema = new Schema({
-    Writer_email: {
-        type:String,
+const CampegroundSchema = new Schema({
+    Campground_id: {
+        type:Int,
         required:true,
         unique: true
     },
@@ -11,16 +11,16 @@ const ReviewSchema = new Schema({
         type:String,
         required:true
     },
-    Image: {
-        type:Image,
+    Campground_location: {
+        type:String,
         required:true
     },
-    Star_point: {
-        type:Double,
+    Campground_information: {
+        type:String,
         required:true
     },
-    Writing_content: {
-        type: String,
+    Campground_image: {
+        type: Image,
         required:true
     },
     Owner_email: {
@@ -29,5 +29,5 @@ const ReviewSchema = new Schema({
     },
 });
 
-const Review = mongoose.model('Review', ReviewSchema);
-module.exports = Review;
+const Campground = mongoose.model('Campground', CampgroundSchema);
+module.exports = Campground;

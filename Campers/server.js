@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+const User = require('./schema/User');
+const Campground = require('./schema/Campground');
+const Review = require('./schema/review');
+const Reservation = require('./schema/reservation');
+const QnA = require('./schema/QnA');
+
 var app = express();
 
 //connect to mongodb
@@ -19,6 +25,23 @@ app.use('/', router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+/*
+//db
+app.get('/add-user', (req,res) => {
+    const user = new User({
+        //데이터 입력
+    });
+
+    user.save()
+        .then((result) => { //promise-callback
+            res.send(result)
+        })
+        .catch((err) => {
+            console.log(err);
+      });
+        
+})
+*/
 // 메인(검색) 화면
 app.get(['/', '/main'], function(req, res) {
     // 데이터베이스에서 캠핑장 정보 뽑아와주세요~
