@@ -3,11 +3,7 @@ const Schema = mongoose.Schema;
 
 const QnASchema = new Schema({
     QnA_id: {
-<<<<<<< Updated upstream
-        type: Number,
-=======
         type:Number,
->>>>>>> Stashed changes
         required:true,
         unique: true
     },

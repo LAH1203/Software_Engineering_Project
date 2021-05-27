@@ -31,13 +31,15 @@ html
             input(type='radio' name='sortBy' checked='checked')
             label 등록순
             input(type='radio' name='sortBy')
-            label 인기순
+            label 이름순
 
             br
 
             div(data-role='content')
                 ul(data-role='campList')
                     -for (camp in camp_name)
-                        button(type='button' value=`${camp_id[camp]}` onclick='goToCampgroundPage(value)' style='border: 0px none; background-color: transparent;')= camp_name[camp]
+                        button(value=`${camp_id[camp]}` onclick='goToCampgroundPage(value)' style='border: 0px none; background-color: transparent;')
+                            div(style='font-size: 1em')= camp_location[camp]
+                            div(style='font-size: 1em')= camp_name[camp]
                         br
                         br
