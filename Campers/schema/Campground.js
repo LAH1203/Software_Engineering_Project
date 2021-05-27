@@ -1,20 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-<<<<<<< Updated upstream
+/*
 const imgSchema = new Schema({
     width: Number,
     height: Number
 });
+*/
 
 const CampgroundSchema = new Schema({
     Campground_id: {
-        type: Number,
-=======
-const CampgroundSchema = new Schema({
-    Campground_id: {
         type:Number,
->>>>>>> Stashed changes
         required:true,
         unique: true
     },
@@ -27,11 +23,8 @@ const CampgroundSchema = new Schema({
         required:true
     },
     Campground_information: {
-<<<<<<< Updated upstream
+
         type: String,
-        required:true
-=======
-        type:String,
         required:true
     },
     Campground_image: {
@@ -40,9 +33,8 @@ const CampgroundSchema = new Schema({
             contentType: String
         },
         //required:true
->>>>>>> Stashed changes
     },
-    Campground_image: imgSchema,
+
     Owner_email: {
         type: String,
         //required:true

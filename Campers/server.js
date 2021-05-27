@@ -44,6 +44,7 @@ const campground2 = new Campground({
 
 });
 /*
+   //데이터 넣기 => 
 campground1.save()
     .then((result) => {
         console.log('database write successed');
@@ -103,30 +104,37 @@ app.get(['/', '/main'], function(req, res) {
     */
 });
 
-//post형식으로 프론트로부터 데이터 가져오기
+//post형식으로 프론트로부터 데이터 가져오기 result가 배열..??
 app.post('/main', function (req, res) {
-    let search = req.body.search;
-    //var lis = [];
 
-    Campground.find({Campground_name: `${search}`}).
-        then((result) => {
-            //console.log(result[0].Campground_name);
-            console.log(result);
-            //lis.push(result);
+    let search = req.body.search;
+    let name_lis = [];
+    let id_lis = [];
+    var mysort = {Campground_name : -1};
+
+    //campground/find( , (err, docs))
+    
+    Campground.find({Campground_name: new RegExp(`${search}`)})
+        .sort(mysort)
+        .then((result) => {
+
+            for(var i = 0; i < result.length ; i++){
+                name_lis.push(result[i].Campground_name) ;
+                id_lis.push(result[i].Campground_id);
+            }
             res.render('main_page', { 
-                camp_name: result[0].Campground_name, camp_id: result[0].Campground_id});
+                camp_name: name_lis, camp_id: id_lis});
         })
         .catch((err) => {
             console.log(err);
         });
+
      /*
     const campgrounds = Campground.findOne()
         .where(search)
         .equals(req.)
     */
 
-
-   
     /*
     opt = [{camp_name : new RegExp('${search}')},
            {Campground_location : new RegExp()}
@@ -191,8 +199,7 @@ app.get('/setcampinfo', function(req, res) {
 app.get('/camp', function(req, res) {
 
 });
-
-<<<<<<< Updated upstream
+/*
 // 예약 화면
 app.get('/reservation', function(req, res) {
     res.render('reservation_page');
@@ -320,4 +327,3 @@ app.get('/single-blog', (req,res) => {
         }
 })
 */
->>>>>>> Stashed changes
