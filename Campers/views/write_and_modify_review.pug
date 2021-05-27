@@ -1,0 +1,27 @@
+doctype html 
+html
+    head
+        title 후기 입력
+    body
+        h1 후기 입력
+        form(action = "write_and_modify_review" methoud="post")
+            p
+                h3 후기 작성란
+                
+                textarea(name="description", cols="30", rows="10")
+            p 
+                h3 사진 업로드
+                
+                input(type="file")
+            p 
+                h3 별점 
+                input(type="number" min="1" max="5" step="1" value="1") 
+
+            //input(type='button' onclick="window.location.href = 'https://hianna.tistory.com'" value='작성 완료') //작동
+            input(type='button' onclick="window.location.href = '/mypage'" value='작성하기')
+            input(type='button' onclick="window.location.href = '/mypage'" value='취소하기')
+            //button (onClick="history.back(-1)") 취소하기
+script.
+  function move() {
+    window.location.href = '/mypage'
+  }
