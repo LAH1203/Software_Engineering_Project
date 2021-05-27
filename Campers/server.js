@@ -64,9 +64,43 @@ campground2.save()
 // 메인(검색) 화면
 app.get(['/', '/main'], function(req, res) {
     // 데이터베이스에서 캠핑장 정보 뽑아와주세요~
+
+    let camp_name = []
+    let camp_id = []
+    //var campground = mongoose.model('Schema', Campground);
+    Campground.find({},{Campground_name:true,Campground_id:true},function(error, campgrounds){
+        console.log('--- Read all ---');
+        if(error){
+            console.log(error);
+        }else{
+            console.log(campgrounds);
+            for(var i = 0; i<campgrounds.length; i++) {
+
+                camp_name.push(campgrounds[i].Campground_name);
+                camp_id.push(campgrounds[i].Campground_id);
+            }
+        
+               console.log(camp_name);
+               res.render('main_page', { camp_name: camp_name, camp_id: camp_id });
+            
+            //console.log(camp_name);
+            
+        }  
+    });
+   
+    /*
+    Campground.find({'campgrounds.name':Campground_name}, function(err, contact){
+        console.log(campgrounds.name);
+        res.render('main_page', { camp_name: camp_name, camp_id: camp_id });
+      });
+      
+      */
+      
+    /*
     let camp_name = ['아름이네 캠핑장', '서정이네 캠핑장', '지민이네 캠핑장', '세미네 캠핑장', '아현이네 캠핑장'];
     let camp_id = [1, 2, 3, 4, 5];
     res.render('main_page', { camp_name: camp_name, camp_id: camp_id });
+    */
 });
 
 //post형식으로 프론트로부터 데이터 가져오기
