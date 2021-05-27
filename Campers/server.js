@@ -3,6 +3,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var mongoose = require('mongoose');
+const crypto = require('crypto');
 const User = require('./schema/User');
 const Campground = require('./schema/Campground');
 const Review = require('./schema/review');
@@ -27,20 +28,23 @@ app.use(express.static(__dirname + '/public'));
 app.use('/', router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressSession({
+    secret:'my key',
+    resave:true,
+    saveUninitialized:true
+}));
 
 // 메인(검색) 화면
 app.get(['/', '/main'], function(req, res) {
-    // 데이터베이스에서 캠핑장 정보 뽑아와주세요~
     let camp_name = []
     let camp_id = []
     let camp_location = []
-    // var campground = mongoose.model('Schema', Campground);
+
     Campground.find({},{Campground_name:true,Campground_id:true,Campground_location:true},function(error, campgrounds){
-        console.log('--- Read all ---');
         if(error){
             console.log(error);
         } else {
-            console.log(campgrounds);
+
             for(var i = 0; i<campgrounds.length; i++) {
                 camp_name.push(campgrounds[i].Campground_name);
                 camp_id.push(campgrounds[i].Campground_id);
@@ -77,10 +81,50 @@ app.post('/main', function(req, res) {
 
 // 로그인 화면
 app.get('/login', function(req, res) {
+    let session = req.session;
+
+    res.render('login_page', {
+        session : session
+    });
 
 });
 
 app.post('/login', function(req, res) {
+    let body = req.body;
+    var dbPassword = '';
+    let inputPassword = body.password;
+    //let hashPassword = crypto.createHash("sha512").update(inputPassword).digest("hex");
+    User.findOne({Email: `${body.email}`}, function (err, result){
+        
+        if(err){
+            res.send(err);
+        } else {
+            if (result == null){
+                console.log("읍다..")
+                res.writeHead(200,{'Content-Type':'text/html; charset=utf8'});
+                res.write('<h1>로그인 실패</h1>');
+                res.write("<br><br><a href='/'>다시 로그인하기</a>");
+                res.end();
+            }else {
+                dbPassword=result.Password;
+                if(dbPassword === inputPassword){
+                    console.log("비밀번호 일치");
+                    // 세션 설정
+                    req.session.email = body.email;
+                    req.session.mode = result.Mode;
+                    req.session.name = result.Name;
+                    req.session.phoneNumber = result.Phone_number;
+                    res.redirect('/');
+                }else{
+                    console.log("비밀번호 불일치");
+                    console.log(dbPassword);
+                    //console.log(inputPassword);
+                    res.redirect('/login');
+                }
+            }
+        }
+        
+    });
     
 });
 
@@ -96,7 +140,7 @@ app.post('/signup', function(req, res) {
 // 마이페이지
 app.get('/mypage', function(req, res) {
     // 세션에 사용자 정보가 저장되어있지 않을 경우 로그인 하지 않은 상태이므로 로그인을 먼저 하도록 함
-    if (!req.session.name) {
+    if (!req.session.email) {
         res.redirect('/login');
     }
     var userInfo = {};
