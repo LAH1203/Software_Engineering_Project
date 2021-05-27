@@ -1,0 +1,34 @@
+doctype html
+html
+    head
+        meta(charset = 'utf-8')
+        title Login
+
+        script(scr='/login.js')
+    body 
+        form(name='login_form' action='/login' method='post')
+            center
+                img(scr='' class='' style = '' onclik ="")
+                h2 로그인
+                hr
+                div(style='height: 10px;')
+                div
+                    div 
+                        a(class='form item name') E-mail 
+                    div 
+                        input(type='email' name='email' placeholder='Enter E-mail' class='form_input' required='required')
+                    div(class='form_text_alert_padding')
+                        div(id='alert_email' class='form_text_alert')
+                div 
+                    div 
+                        a(calss='form_item_name') Password 
+                    div
+                        input(type='password' name='password' placeholder='Enter password' calss='form_input' required='required')
+                    div(class='form_text_alter_padding')
+                        div(id='alter_password' class='form_text_alter')
+                div
+                    button(type='submit' class='form_button') 로그인
+                div(style='height: 10px;')
+                div
+                    button(type='button' class='form_button' onclick="location.href='/signup'") 회원가입
+                
