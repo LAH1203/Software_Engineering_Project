@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+/*
 const imgSchema = new Schema({
     width: Number,
     height: Number
 });
-
+*/
 const ReviewSchema = new Schema({
     Writer_email: {
         type: String,

@@ -5,6 +5,7 @@ const imgSchema = new Schema({
     width: Number,
     height: Number
 });
+*/
 
 const CampgroundSchema = new Schema({
     Campground_id: {
@@ -30,7 +31,7 @@ const CampgroundSchema = new Schema({
             contentType: String
         }
     },
-    Campground_image: imgSchema,
+
     Owner_email: {
         type: String,
         //required:true
