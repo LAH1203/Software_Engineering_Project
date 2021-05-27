@@ -13,7 +13,18 @@ const ReviewSchema = new Schema({
         unique: true
     },
     Campground_name: {
+<<<<<<< Updated upstream
         type: String,
+=======
+        type:String,
+        required:true
+    },
+    Image: {
+        type:{
+            data: Buffer,
+            contentType: String
+        },
+>>>>>>> Stashed changes
         required:true
     },
     Image: imgSchema,

@@ -3,7 +3,11 @@ const Schema = mongoose.Schema;
 
 const QnASchema = new Schema({
     QnA_id: {
+<<<<<<< Updated upstream
         type: Number,
+=======
+        type:Number,
+>>>>>>> Stashed changes
         required:true,
         unique: true
     },
@@ -29,7 +33,7 @@ const QnASchema = new Schema({
     },
 });
 
-//이 이름으로 database와 commnuicate, model의 이름 설정(singular of the collection name, store constants)
+//이 이름으로 database와 commnuicate, model의 이름 설정(singular of the collection name => store constants)
 //use it to save some new documents to our database collection.
 const Qna = mongoose.model('QnA', QnASchema );
 module.exports = Qna;
