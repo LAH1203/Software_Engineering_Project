@@ -16,11 +16,7 @@ const ReservationSchema = new Schema({
         required:true
     },
     Number_of_people: {
-<<<<<<< Updated upstream
-        type: Number,
-=======
         type:Number,
->>>>>>> Stashed changes
         required:true
     },
     Approval_date: {
