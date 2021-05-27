@@ -1,0 +1,51 @@
+doctype html 
+html 
+    head 
+        meta(charset='utf-8')
+        title modify 
+        
+    body 
+        form(name='updatemyinfo_form' action='/updatemyinfo' method='post')
+             -var useremail='user@naver.com'
+                img(src='' class='' style='' onclick='')
+                h2 내 정보 수정
+                hr
+                div(style='height : 10px;')
+                center
+                    div 
+                        div 
+                            a(class='form_item_name') 이름
+                        div 
+                            input(type='text' name='name' placeholder='Enter name' class='form_input')
+                        div(class='form_text_alert_padding')
+                            div(id='alter_name' class='form_text_alter')
+                    div 
+                        div 
+                            a(class='form_item_name') 이메일
+                        div
+                            input(type ='text' name='email' placeholder=useremail class='form_input' readOnly )
+                        div(class = 'form_text_alter_padding')
+                            div(id='alert_email' class='form_text_alter')
+                    div 
+                        div
+                            a(class='form_item_name') 비밀번호
+                        div 
+                            input(type='password' name='password' placeholder='Enter password' calss='form_input')
+                        div(class='form_text_alter_padding')
+                            div(id='alter_password' class='form_text_alter')
+                    div 
+                        div 
+                            a(class='form_item_name') 비밀번호 확인 
+                        div 
+                            input(type='password' name='password2' placeholder='Confirm password' class='form_input')
+                        div(class='form_text_alter_padding')
+                            div(id='alert_confirmpassword' class='form_text_alert')
+                    div 
+                        div 
+                            a(class='form_item_name') 휴대폰 번호
+                        div 
+                            input(type='number' name='phone' placeholder='Enter phone number' class='form_input')
+                        div(class='form_text_alert_padding')
+                            div(id='alter_phone' class='form_text_alter')
+                    div 
+                        button(type='button' class='form_button') 수정하기
