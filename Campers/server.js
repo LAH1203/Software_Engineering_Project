@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
+var expressSession = require('express-session');
 var mongoose = require('mongoose');
 const User = require('./schema/User');
 const Campground = require('./schema/Campground');
@@ -27,30 +28,13 @@ app.use('/', router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//MongoError: E11000 duplicate key error collection : 이미 campground로 id : 1을 추가 => 이후에 같은 id : 1의 campground1을 또 추가
-const campground1 = new Campground({
-    Campground_id: 1,
-    Campground_name: '세미네 캠핑장',
-    Campground_location: '서울',
-    Campground_information:'좋아요'
-
-});
-
-const campground2 = new Campground({
-    Campground_id: 2,
-    Campground_name: '지민이네 캠핑장',
-    Campground_location: '부산',
-    Campground_information:'나빠요'
-
-});
-
 // 메인(검색) 화면
 app.get(['/', '/main'], function(req, res) {
     // 데이터베이스에서 캠핑장 정보 뽑아와주세요~
     let camp_name = []
     let camp_id = []
     let camp_location = []
-    //var campground = mongoose.model('Schema', Campground);
+    // var campground = mongoose.model('Schema', Campground);
     Campground.find({},{Campground_name:true,Campground_id:true,Campground_location:true},function(error, campgrounds){
         console.log('--- Read all ---');
         if(error){
@@ -68,22 +52,23 @@ app.get(['/', '/main'], function(req, res) {
 });
 
 //post형식으로 프론트로부터 데이터 가져오기
-app.post('/main', function (req, res) {
+app.post('/main', function(req, res) {
     let search = req.body.search;
-    let name_lis = [];
-    let id_lis = [];
-    var mysort = {Campground_name : -1};
+    let camp_name = [];
+    let camp_id = [];
+    let camp_location = [];
+    var mysort = { Campground_name : -1 };
 
-   Campground.find({Campground_name: new RegExp(`${search}`)})
+    Campground.find({Campground_name: new RegExp(`${search}`)})
         .sort(mysort)
         .then((result) => {
-
-            for(var i = 0; i < result.length ; i++){
-                name_lis.push(result[i].Campground_name) ;
-                id_lis.push(result[i].Campground_id);
+            for(var i = 0; i < result.length ; i++) { 
+                camp_name.push(result[i].Campground_name) ;
+                camp_id.push(result[i].Campground_id);
+                camp_location.push(result[i].Campground_location);
             }
             res.render('main_page', { 
-                camp_name: name_lis, camp_id: id_lis});
+                camp_name: camp_name, camp_id: camp_id, camp_location: camp_location });
         })
         .catch((err) => {
             console.log(err);
@@ -92,7 +77,7 @@ app.post('/main', function (req, res) {
 
 // 로그인 화면
 app.get('/login', function(req, res) {
-    
+
 });
 
 app.post('/login', function(req, res) {
@@ -110,7 +95,48 @@ app.post('/signup', function(req, res) {
 
 // 마이페이지
 app.get('/mypage', function(req, res) {
-    res.render('MyPage');
+    // 세션에 사용자 정보가 저장되어있지 않을 경우 로그인 하지 않은 상태이므로 로그인을 먼저 하도록 함
+    if (!req.session.name) {
+        res.redirect('/login');
+    }
+    var userInfo = {};
+    userInfo.name = req.session.name;
+    userInfo.email = req.session.email;
+    userInfo.phoneNumber = req.session.phoneNumber;
+    userInfo.mode = req.session.mode;
+    var sortByDate = { Start_date : -1 };
+
+    let _id = [];
+    let campgroundName = [];
+    let startDate = [];
+    let endDate = [];
+    let approvalDate = [];
+    let checkinDate = [];
+
+    Reservation.find({Reservation_email: new RegExp(`${userInfo.email}`)})
+        .sort(sortByDate)
+        .then((result) => {
+            for(var i = 0; i < result.length ; i++) {
+                _id.push(result[i]._id);
+                campgroundName.push(result[i].Campground_name);
+                startDate.push(result[i].Start_date);
+                endDate.push(result[i].End_date);
+                approvalDate.push(result[i].Approval_date);
+                checkinDate.push(result[i].Checkin_date);
+            }
+            res.render('MyPage', {
+                userInfo: userInfo,
+                _id: _id,
+                campgroundName: campgroundName,
+                startDate: startDate,
+                endDate: endDate,
+                approvalDate: approvalDate,
+                checkinDate: checkinDate
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 // 후기 작성 및 수정 화면
@@ -141,6 +167,37 @@ app.get('/camp', function(req, res) {
 // 예약 화면
 app.get('/reservation', function(req, res) {
     res.render('reservation_page');
+});
+
+// 예약 취소
+app.get('/deleteReservation', function(req, res) {
+    var id = req.query.id;
+    Reservation.remove({_id: `${id}`}, function(err) {
+        if (err) throw err;
+        console.log('예약 삭제 성공!');
+    });
+    res.redirect('/mypage');
+});
+
+// 로그아웃
+// 세션 정보 지우기
+app.get('/logout', function(req, res) {
+    req.session.destroy(function(err) {
+        if (err)
+            console.log('로그아웃 실패');
+        else
+            res.redirect('/');
+    });
+});
+
+// 회원탈퇴
+app.get('/deleteUserInfo', function(req, res) {
+    var email = req.query.email;
+    User.remove({Email: `${email}`}, function(err) {
+        if (err) throw err;
+        console.log('회원 탈퇴 성공!');
+    });
+    res.redirect('/');
 });
 
 app.post('/reservation', function(req, res) {

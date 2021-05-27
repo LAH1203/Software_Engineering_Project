@@ -6,39 +6,40 @@ html
         script(src='/main.js') 
     body 
         form(name='main_form' action='/main' method='post')
-            img(src='/image/logo.png' alt='logo title' width='500' onclick="location.href='/'" align='center')
-            button(type='button' onclick="location.href='/login'" style='border: 0px none; background-color: transparent; float: right;') 로그인
-            button(type='button' onclick="location.href='/mypage'" style='border: 0px none; background-color: transparent; float: right;')
-                svg(xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16")
-                    path(d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z")
-                    path(fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z")
+            center
+                img(src='/image/logo.png' alt='logo title' width='500' onclick="location.href='/'")
+                button(type='button' onclick="location.href='/login'" style='border: 0px none; background-color: transparent; float: right;') 로그인
+                button(type='button' onclick="location.href='/mypage'" style='border: 0px none; background-color: transparent; float: right;')
+                    svg(xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16")
+                        path(d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z")
+                        path(fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z")
             
-            br
+                br
 
-            select(id='locationSubject')
-                option(selected='selected') 서울/인천/경기권
-                option 충청권
-                option 경상/부산권
-                option 제주권
-                option 강원권
-                option 전라권
-            input(type='text' name='search' placeholder='내용을 입력해주세요')
-            button(type='submit') 검색하기
+                select(id='locationSubject')
+                    option(selected='selected') 서울/인천/경기권
+                    option 충청권
+                    option 경상/부산권
+                    option 제주권
+                    option 강원권
+                    option 전라권
+                input(type='text' name='search' placeholder='내용을 입력해주세요')
+                button(type='submit') 검색하기
 
-            br
+                br
 
-            input(type='radio' name='sortBy' checked='checked')
-            label 등록순
-            input(type='radio' name='sortBy')
-            label 이름순
+                input(type='radio' name='sortBy' checked='checked')
+                label 등록순
+                input(type='radio' name='sortBy')
+                label 이름순
 
-            br
+                br
 
-            div(data-role='content')
-                ul(data-role='campList')
-                    -for (camp in camp_name)
-                        button(value=`${camp_id[camp]}` onclick='goToCampgroundPage(value)' style='border: 0px none; background-color: transparent;')
-                            div(style='font-size: 1em')= camp_location[camp]
-                            div(style='font-size: 1em')= camp_name[camp]
-                        br
-                        br
+                div(data-role='content')
+                    ul(data-role='campList')
+                        -for (camp in camp_name)
+                            button(value=`${camp_id[camp]}` onclick='goToCampgroundPage(value)' style='border: 0px none; background-color: transparent;')
+                                div(style='font-size: 1em')= camp_location[camp]
+                                div(style='font-size: 1em')= camp_name[camp]
+                            br
+                            br

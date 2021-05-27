@@ -2,21 +2,42 @@ doctype html
 html
     head
         title 마이페이지
+        script(src='/mypage.js') 
     body
         h1 마이페이지
             h3 내 정보
-            input(type='button' value='수정')
+            label [이름]
+            p= userInfo.name
+            label [이메일]
+            p= userInfo.email 
+            label [번호]
+            p= userInfo.phoneNumber
+            input(type='button' value='수정' onclick="location.href='/updateUserInfo'")
             br
-            textarea(name="myinformation", cols="30", rows="5",  readonly) 되나? 
+            br
+
             hr
+            
             h3 예약 내역
-            //input(type='button' onclick="window.location.href = '/setcampinfo'" value='등록')
-            //br
-            textarea(name="myreservation", cols="30", rows="10", readonly) 나도 놀고싶다
+            -for (camp in campgroundName)
+                label [캠핑장 이름]
+                p= campgroundName[camp] 
+                label [입실 날짜]
+                p= startDate[camp]
+                label [퇴실 날짜]
+                p= endDate[camp]
+                label [승인 날짜]
+                p= approvalDate[camp]
+                label [체크인 날짜]
+                p= checkinDate[camp]
+                button(type='button') 예약 공유
+                button(type='button' value=`${_id[camp]}` onclick='delete_reservation(value)') 예약 취소
+                br
+                br
             br
             hr
         
-        button(type="submit") 로그 아웃
+        button(type="button" onclick="location.href='/logout'") 로그아웃
         br
         br
-        button(type="submit") 회원 탈퇴
+        button(type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴
