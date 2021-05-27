@@ -23,7 +23,6 @@ const ReviewSchema = new Schema({
         },
         required:true
     },
-    Image: imgSchema,
     Star_point: {
         type: Number,
         required:true
