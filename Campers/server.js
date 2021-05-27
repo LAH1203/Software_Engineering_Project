@@ -164,17 +164,17 @@ app.post('/signup', function(req, res) {
 
 // 마이페이지
 app.get('/mypage', function(req, res) {
-
+    res.render('MyPage')
 });
 
 // 후기 작성 및 수정 화면
 app.get('/setreview', function(req, res) {
-
+    res.render('write_and_modify_review')
 });
 
 // Q&A 작성 및 수정 화면
 app.get('/setqna', function(req, res) {
-
+    res.render('write_and_modify_QnA')
 });
 
 // 내 정보 수정 화면
@@ -184,7 +184,7 @@ app.get('/updatemyinfo', function(req, res) {
 
 // 캠핑장 등록 및 수정 화면
 app.get('/setcampinfo', function(req, res) {
-
+    res.render('add_and _modify_campground')
 });
 
 // 상세정보 화면
