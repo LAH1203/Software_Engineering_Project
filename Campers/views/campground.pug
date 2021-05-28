@@ -1,0 +1,42 @@
+doctype html 
+html
+    head
+        meta(charset='utf-8')
+        title 캠핑장 상세정보
+        script(src='/campground_main.js') 
+    body
+        //캠핑장 이름
+        div(style='font-size: 3em')= camp_name
+        h2 캠핑장 이미지
+        //캠핑장 주소
+        div(style='font-size: 1em')= camp_location
+        br
+        input(type='button' onclick="window.location.href = '/reservation'" value='예약하기')
+        //새페이지로 reload
+        //jquery
+        br
+        br
+        //-var bottom 
+        //#{camp_information}
+        //script(src=`${camp_information}`)
+        //var info = #{camp_information};
+        //-const info = `${camp_information}`
+        //label #{info}
+        //div.hi slkskdj 
+        //-var theGreat = span.escape;
+        //input(type='button' value='정보' id=`${camp_information}` onclick="setQnA(id)")
+        //p This will be safe: #{theGreat}
+        br
+        //span.quiz-text ssssss
+        input(type='button' value='정보' id=`${camp_information}` onclick="setInformation(id)")
+        input(type='button' value='Q&A' id=`${camp_QnA}` onclick="setQnA(id)")
+        input(type='button' value='후기' id=`${camp_review}` onclick="setReview(id)")
+        br
+        span.quiz-text #{camp_information}
+        //div로 변수 출력할때는 div= 붙여서 쓰기
+        //div(style='font-size: 1em')= bottom
+        //input(type='button' value='정보' id="information")
+        //input(type='button' value='Q&A' id="QnA")
+        //input(type='button' value='후기' id="review")
+
+        
