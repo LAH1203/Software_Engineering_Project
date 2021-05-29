@@ -1,24 +1,45 @@
 doctype html 
 html
     head
-        script(src='/warning.js') 
         title 마이페이지
+        script(src='/main.js') 
     body
         h1 마이페이지
-            h3
-            label 내 정보
-            input(type='button' value='수정')
+            h3 내 정보
+            label [이름]
+            p= userInfo.name
+            label [이메일]
+            p= userInfo.email 
+            label [번호]
+            p= userInfo.phoneNumber
+            input(type='button' value='수정' onclick="location.href='/updateUserInfo'")
             br
-            textarea(name="myinformation", cols="30", rows="5",  readonly) 되나? 
+            br
+
             hr
-            label 예약 요청 현황
-            input(type='button' onclick="window.location.href = '/setcampinfo'" value='등록')
-            br
-            textarea(name="myreservation", cols="30", rows="10", readonly) 나도 놀고싶다
-            br
+
+            h3 내 캠핑장 목록
+            input(type='button' onclick="location.href='/setcampinfo'" value='등록')
+            -for (camp in camp_name)
+                button(value=`${camp_id[camp]}` onclick='goToCampgroundPage(value)' style='border: 0px none; background-color: transparent;')
+                    div(style='font-size: 1em')= camp_location[camp]
+                    div(style='font-size: 1em')= camp_name[camp]
+                br
+                br
+
             hr
+
+            h3 예약 요청 현황
+            -for (res in reservation_email)
+                div= reservation_email[res] 
+                div= start_date[res]
+                div= end_date[res]
+                div= number_of_people[res]
+                button(type='button') 승인
+                button(type='button') 반려
+                button(type='button') 체크인
         
-        button(type="submit") 로그아웃
+        button(type="button" onclick="location.href='/logout'") 로그아웃
         br
         br
-        button(type="submit") 회원 탈퇴
+        button(type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴

@@ -15,21 +15,21 @@ html
                 div 
                     a(class='form_item_name') 이름
                 div 
-                    input(type='text' name='name' placeholder='Enter name' class='form_input')
+                    input(type='text'  name='name' placeholder='Enter name' class='form_input')
                 div(class='form_text_alert_padding')
                      div(id='alter_name' class='form_text_alter')
             div 
                 div 
                     a(class='form_item_name') 이메일
                 div 
-                     input(type ='text' name='email' placeholder='Enter E-mail' class='form_input')
+                     input(type ='text'  name='email' placeholder='Enter E-mail' class='form_input')
                 div(class = 'form_text_alter_padding')
                     div(id='alert_email' class='form_text_alter')
             div 
                 div
                     a(class='form_item_name') 비밀번호
                 div 
-                    input(type='password' name='password' placeholder='Enter password' calss='form_input')
+                    input(type='password'  name='password' placeholder='Enter password' calss='form_input')
                 div(class='form_text_alter_padding')
                     div(id='alter_password' class='form_text_alter')
             div 
@@ -43,7 +43,7 @@ html
                 div 
                     a(class='form_item_name') 전화번호
                 div 
-                    input(type='number' name='phone' placeholder='Enter phone number' class='form_input')
+                    input(type='number'  name='phone' placeholder='Enter phone number' class='form_input')
                 div(class='form_text_alert_padding')
                     div(id='alter_phone' class='form_text_alter')
                     
@@ -53,4 +53,4 @@ html
                 input(type='radio' name='usertype')
                 label 캠핑장 주인
             div 
-                button(type='button' class='form_button') 회원가입
+                button(type='button' class='form_button' onclick = 'signupform_check()') 회원가입
