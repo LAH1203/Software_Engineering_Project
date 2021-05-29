@@ -1,9 +1,12 @@
-{
+  {
   "dependencies": {
+    "async": "^3.2.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
+    "dialog": "^0.3.1",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "mongo-sync": "^2.0.1",
     "mongoose": "^5.12.11",
     "pug": "^3.0.2"
   }

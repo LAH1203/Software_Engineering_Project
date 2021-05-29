@@ -2,8 +2,8 @@ doctype html
 html 
     head 
         meta(charset='utf-8')
-        title modify 
-        
+        title modify My Information
+        script(src='/signup.js') 
     body 
         form(name='updatemyinfo_form' action='/updatemyinfo' method='post')
              -var useremail='user@naver.com'
@@ -23,7 +23,7 @@ html
                         div 
                             a(class='form_item_name') 이메일
                         div
-                            input(type ='text' name='email' placeholder=useremail class='form_input' readOnly )
+                            input(type ='text' name='email' value=`${useremail}` class='form_input' readOnly )
                         div(class = 'form_text_alter_padding')
                             div(id='alert_email' class='form_text_alter')
                     div 

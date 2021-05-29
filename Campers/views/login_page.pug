@@ -3,8 +3,6 @@ html
     head
         meta(charset = 'utf-8')
         title Login
-
-        script(scr='/login.js')
     body 
         form(name='login_form' action='/login' method='post')
             center
@@ -21,7 +19,7 @@ html
                         div(id='alert_email' class='form_text_alert')
                 div 
                     div 
-                        a(calss='form_item_name') Password 
+                        a(class='form_item_name') Password 
                     div
                         input(type='password' name='password' placeholder='Enter password' calss='form_input' required='required')
                     div(class='form_text_alter_padding')
@@ -31,4 +29,3 @@ html
                 div(style='height: 10px;')
                 div
                     button(type='button' class='form_button' onclick="location.href='/signup'") 회원가입
-                

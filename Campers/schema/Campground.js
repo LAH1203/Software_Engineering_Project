@@ -43,4 +43,3 @@ const CampgroundSchema = new Schema({
 
 const Campground = mongoose.model('Campground', CampgroundSchema);
 module.exports = Campground;
-
