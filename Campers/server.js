@@ -3,7 +3,6 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var msg = require('dialog');
-var async = require('async');
 var mongoose = require('mongoose');
 const crypto = require('crypto');
 const User = require('./schema/User');
@@ -21,7 +20,14 @@ mongoose.connect(dbUri,{useNewUrlParser: true, useUnifiedTopology:true})
         console.log(app.get('port') + '번 포트 연결');
     }))
     .catch((err) => console.log(err));
-    
+
+/*
+// Mongo Sync
+var sync_mongo_server = require('mongo-sync').Server;
+var server = new sync_mongo_server('0.0.0.0');
+var sync_database = server.db('myFirstDatabase');
+*/
+
 app.locals.pretty = true;
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -144,6 +150,7 @@ app.post('/signup', function(req, res) {
 app.get('/mypage', function(req, res) {
     // 세션에 사용자 정보가 저장되어있지 않을 경우 로그인 하지 않은 상태이므로 로그인을 먼저 하도록 함
     
+    /*
     if (!req.session.name) {
         res.redirect('/login');
     }
@@ -152,14 +159,13 @@ app.get('/mypage', function(req, res) {
     userInfo.email = req.session.email;
     userInfo.phoneNumber = req.session.phoneNumber;
     userInfo.mode = req.session.mode;
-    
-    /*
+    */
+
     var userInfo = {};
     userInfo.name = "바보";
     userInfo.email = "hahaha@email.com";
     userInfo.phoneNumber = "01011111111";
     userInfo.mode = 1;
-    */
 
     // 고객
     if (userInfo.mode == 0) {
@@ -217,11 +223,22 @@ app.get('/mypage', function(req, res) {
                     camp_id.push(result[i].Campground_id);
                     camp_location.push(result[i].Campground_location);
                 }
+                res.render('mypage_owner', {
+                    userInfo: userInfo,
+                    camp_name: camp_name,
+                    camp_id: camp_id,
+                    camp_location: camp_location,
+                    reservation_email: reservation_email,
+                    start_date: start_date,
+                    end_date: end_date,
+                    number_of_people: number_of_people
+                });
             })
             .catch((err) => {
                 console.log(err);
             });
         
+        /*
         for (var i = 0; i < camp_name.length; i++) {
             Reservation.find({Campground_name: `${camp_name[i]}`})
                 .then((result) => {
@@ -244,6 +261,7 @@ app.get('/mypage', function(req, res) {
                     console.log(err);
                 });
         }
+        */
     }
     // mode가 2면 관리자
     else if (userInfo.mode == 2) {
@@ -272,6 +290,21 @@ app.get('/setcampinfo', function(req, res) {
     res.render('add_and _modify_campground');
 });
 
+// 캠핑장 삭제
+app.get('/deletecampinfo', function(req, res) {
+    var camp_id = req.query.id;
+    Campground.remove({Campground_id: `${camp_id}`}, function(err) {
+        if (err) {
+            msg.info('캠핑장 삭제 실패');
+            res.redirect('/mypage');
+        }
+        else {
+            msg.info('캠핑장 삭제 성공');
+            res.redirect('/mypage');
+        }
+    });
+});
+
 // 상세정보 화면
 app.get('/camp', function(req, res) {
 
@@ -296,10 +329,13 @@ app.get('/deleteReservation', function(req, res) {
 // 세션 정보 지우기
 app.get('/logout', function(req, res) {
     req.session.destroy(function(err) {
-        if (err)
-            console.log('로그아웃 실패');
-        else
+        if (err) {
+            msg.info('로그아웃 실패');
+            res.redirect('/mypage');
+        } else {
+            msg.info('로그아웃 성공');
             res.redirect('/');
+        }
     });
 });
 
@@ -307,10 +343,15 @@ app.get('/logout', function(req, res) {
 app.get('/deleteUserInfo', function(req, res) {
     var email = req.query.email;
     User.remove({Email: `${email}`}, function(err) {
-        if (err) throw err;
-        console.log('회원 탈퇴 성공!');
+        if (err) {
+            msg.info('회원탈퇴 실패');
+            res.redirect('/mypage');
+        }
+        else {
+            msg.info('회원탈퇴 성공');
+            res.redirect('/');
+        }
     });
-    res.redirect('/');
 });
 
 app.post('/reservation', function(req, res) {

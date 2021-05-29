@@ -19,3 +19,14 @@ function delete_user_info(email) {
         return;
     }
 }
+
+function delete_campground_info(id) {
+    if (confirm('삭제하시겠습니까?')) {
+        var url = 'http://localhost:3000/deletecampinfo';
+        var queryParams = '?id=' + id;
+        var link = url + queryParams;
+        location.href = link;
+    } else {
+        return;
+    }
+}

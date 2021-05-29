@@ -3,6 +3,7 @@ html
     head
         title 마이페이지
         script(src='/main.js') 
+        script(src='/mypage.js')
     body
         h1 마이페이지
             h3 내 정보
@@ -20,11 +21,13 @@ html
 
             h3 내 캠핑장 목록
             input(type='button' onclick="location.href='/setcampinfo'" value='등록')
+            br
             -for (camp in camp_name)
                 button(value=`${camp_id[camp]}` onclick='goToCampgroundPage(value)' style='border: 0px none; background-color: transparent;')
                     div(style='font-size: 1em')= camp_location[camp]
                     div(style='font-size: 1em')= camp_name[camp]
                 br
+                button(value=`${camp_id[camp]}` onclick='delete_campground_info(value)') 삭제
                 br
 
             hr
