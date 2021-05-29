@@ -151,7 +151,6 @@ app.post('/signup', function(req, res) {
 app.get('/mypage', function(req, res) {
     // 세션에 사용자 정보가 저장되어있지 않을 경우 로그인 하지 않은 상태이므로 로그인을 먼저 하도록 함
     
-    /*
     if (!req.session.name) {
         res.redirect('/login');
     }
@@ -160,13 +159,6 @@ app.get('/mypage', function(req, res) {
     userInfo.email = req.session.email;
     userInfo.phoneNumber = req.session.phoneNumber;
     userInfo.mode = req.session.mode;
-    */
-
-    var userInfo = {};
-    userInfo.name = "바보";
-    userInfo.email = "hahaha@email.com";
-    userInfo.phoneNumber = "01011111111";
-    userInfo.mode = 1;
 
     // 고객
     if (userInfo.mode == 0) {
