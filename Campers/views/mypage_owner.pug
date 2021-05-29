@@ -23,30 +23,18 @@ html
             input(type='button' onclick="location.href='/setcampinfo'" value='등록')
             br
             -for (camp in camp_name)
-                button(value=`${camp_id[camp]}` onclick='goToCampgroundPage(value)' style='border: 0px none; background-color: transparent;')
+                button(value=`${_id[camp]}` onclick='goToCampgroundPage(value)' style='border: 0px none; background-color: transparent;')
                     div(style='font-size: 1em')= camp_location[camp]
                     div(style='font-size: 1em')= camp_name[camp]
                 br
-<<<<<<< HEAD
-=======
-                button(value=`${camp_id[camp]}` onclick='modify_campground_info(value)') 수정
->>>>>>> e9e4846ff9d0b859ffd38e9530edafe18bbe13a4
-                button(value=`${camp_id[camp]}` onclick='delete_campground_info(value)') 삭제
+                button(value=`${_id[camp]}` onclick='modify_campground_info(value)') 수정
+                button(value=`${_id[camp]}` onclick='delete_campground_info(value)') 삭제
                 br
 
             hr
 
             h3 예약 요청 현황
             -for (res in reservation_email)
-<<<<<<< HEAD
-                div= reservation_email[res] 
-                div= start_date[res]
-                div= end_date[res]
-                div= number_of_people[res]
-                button(type='button') 승인
-                button(type='button') 반려
-                button(type='button') 체크인
-=======
                 label [예약자]
                 div= reservation_email[res] 
                 label [입실 날짜]
@@ -60,9 +48,8 @@ html
                 button(type='button' value=`${reservation_id[res]}` onclick='checkin_reservation(value)') 체크인
                 br
                 br
->>>>>>> e9e4846ff9d0b859ffd38e9530edafe18bbe13a4
-        
-        button(type="button" onclick="location.href='/logout'") 로그아웃
-        br
-        br
-        button(type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴
+
+            button(type="button" onclick="location.href='/logout'") 로그아웃
+            br
+            br
+            button(type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴

@@ -13,6 +13,7 @@ const QnA = require('./schema/QnA');
 
 var app = express();
 
+
 //connect to mongodb
 const dbUri = 'mongodb+srv://semi:1111@cluster0.r5t31.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 mongoose.Promise = require('bluebird');
@@ -49,14 +50,14 @@ app.get(['/', '/main'], function(req, res) {
     let camp_id = []
     let camp_location = []
 
-    Campground.find({},{Campground_name:true,Campground_id:true,Campground_location:true},function(error, campgrounds){
+    Campground.find({},{Campground_name:true,_id:true,Campground_location:true},function(error, campgrounds){
         if(error){
             console.log(error);
         } else {
 
             for(var i = 0; i<campgrounds.length; i++) {
                 camp_name.push(campgrounds[i].Campground_name);
-                camp_id.push(campgrounds[i].Campground_id);
+                camp_id.push(campgrounds[i]._id);
                 camp_location.push(campgrounds[i].Campground_location);
             }
             res.render('main_page', { camp_name: camp_name, camp_id: camp_id, camp_location: camp_location });
@@ -77,7 +78,7 @@ app.post('/main', function(req, res) {
         .then((result) => {
             for(var i = 0; i < result.length ; i++) { 
                 camp_name.push(result[i].Campground_name) ;
-                camp_id.push(result[i].Campground_id);
+                camp_id.push(result[i]._id);
                 camp_location.push(result[i].Campground_location);
             }
             res.render('main_page', { 
@@ -212,7 +213,7 @@ app.get('/mypage', function(req, res) {
             .then((result) => {
                 for (var i = 0; i < result.length ; i++) { 
                     camp_name.push(result[i].Campground_name);
-                    camp_id.push(result[i].Campground_id);
+                    camp_id.push(result[i]._id);
                     camp_location.push(result[i].Campground_location);
                 }
                 for (var i = 0; i < camp_name.length; i++) {
@@ -228,7 +229,7 @@ app.get('/mypage', function(req, res) {
                             res.render('mypage_owner', {
                                 userInfo: userInfo,
                                 camp_name: camp_name,
-                                camp_id: camp_id,
+                                _id: camp_id,
                                 camp_location: camp_location,
                                 reservation_email: reservation_email,
                                 start_date: start_date,
@@ -280,16 +281,60 @@ app.get('/updatemyinfo', function(req, res) {
 
 });
 
+var check= null;
 // 캠핑장 등록 및 수정 화면
 app.get('/setcampinfo', function(req, res) {
     // id 쿼리가 존재하면 수정, 존재하지 않으면 등록입니다!
     res.render('add_and _modify_campground');
+    //console.log('get',req.query.id);
+    check = req.query.id;
+    //console.log('check',check);
 });
+
+
+app.post('/setcampinfo', function(req, res){
+    const body = req.body;
+    if (check == null){
+        const campground = new Campground();
+        campground.Campground_name = body.campground_name;
+        campground.Campground_location = body.campground_location;
+        campground.Campground_information = body.campground_info;
+        campground.Owner_email = req.session.email;
+        campground.save()
+        .then(newPost => {
+            console.log("Create 완료");
+            res.redirect("/mypage");
+        })
+        .catch(err => {
+            res.status(500).json({
+            message: err
+            });
+        });
+    } 
+    else{
+        Campground.updateMany({_id:check},{$set: {
+            Campground_name : body.campground_name,
+            Campground_location : body.campground_location,
+            Campground_information : body.campground_info
+        }})
+        .then(newPost => {
+            console.log("update 완료");
+            res.redirect("/mypage");
+        })
+        .catch(err => {
+            console.log(req.query.id);
+            res.status(500).json({
+            message: err
+            });
+        });
+    }
+});
+
 
 // 캠핑장 삭제
 app.get('/deletecampinfo', function(req, res) {
     var camp_id = req.query.id;
-    Campground.remove({Campground_id: `${camp_id}`}, function(err) {
+    Campground.remove({_id: `${camp_id}`}, function(err) {
         if (err) {
             msg.info('캠핑장 삭제 실패');
             res.redirect('/mypage');

@@ -9,11 +9,6 @@ const imgSchema = new Schema({
 */
 
 const CampgroundSchema = new Schema({
-    Campground_id: {
-        type:Number,
-        required:true,
-        unique: true
-    },
     Campground_name: {
         type: String,
         required:true
