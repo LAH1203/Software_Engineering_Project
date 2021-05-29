@@ -35,14 +35,6 @@ html
 
             h3 예약 요청 현황
             -for (res in reservation_email)
-                div= reservation_email[res] 
-                div= start_date[res]
-                div= end_date[res]
-                div= number_of_people[res]
-                button(type='button') 승인
-                button(type='button') 반려
-                button(type='button') 체크인
-                
                 label [예약자]
                 div= reservation_email[res] 
                 label [입실 날짜]
@@ -56,7 +48,8 @@ html
                 button(type='button' value=`${reservation_id[res]}` onclick='checkin_reservation(value)') 체크인
                 br
                 br
-    button(type="button" onclick="location.href='/logout'") 로그아웃
-    br
-    br
-    button(type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴
+
+            button(type="button" onclick="location.href='/logout'") 로그아웃
+            br
+            br
+            button(type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴
