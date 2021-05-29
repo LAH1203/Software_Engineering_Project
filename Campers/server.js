@@ -15,6 +15,7 @@ var app = express();
 
 //connect to mongodb
 const dbUri = 'mongodb+srv://semi:1111@cluster0.r5t31.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+mongoose.Promise = require('bluebird');
 mongoose.connect(dbUri,{useNewUrlParser: true, useUnifiedTopology:true})
     .then((result)=> app.listen(app.get('port'), ()=> {
         console.log(app.get('port') + '번 포트 연결');
@@ -150,7 +151,6 @@ app.post('/signup', function(req, res) {
 app.get('/mypage', function(req, res) {
     // 세션에 사용자 정보가 저장되어있지 않을 경우 로그인 하지 않은 상태이므로 로그인을 먼저 하도록 함
     
-    /*
     if (!req.session.name) {
         res.redirect('/login');
     }
@@ -159,13 +159,6 @@ app.get('/mypage', function(req, res) {
     userInfo.email = req.session.email;
     userInfo.phoneNumber = req.session.phoneNumber;
     userInfo.mode = req.session.mode;
-    */
-
-    var userInfo = {};
-    userInfo.name = "바보";
-    userInfo.email = "hahaha@email.com";
-    userInfo.phoneNumber = "01011111111";
-    userInfo.mode = 1;
 
     // 고객
     if (userInfo.mode == 0) {
@@ -205,7 +198,6 @@ app.get('/mypage', function(req, res) {
     }
     // 캠핑장 주인
     else if (userInfo.mode == 1) {
-        var mysort = { Campground_name : -1 };
 
         let camp_id = [];
         let camp_name = [];
@@ -214,15 +206,42 @@ app.get('/mypage', function(req, res) {
         let start_date = [];
         let end_date = [];
         let number_of_people = [];
+        let reservation_id = [];
 
-        Campground.find({Owner_email: new RegExp(`${userInfo.email}`)})
-            .sort(mysort)
+        Campground.find({Owner_email: `${userInfo.email}`})
             .then((result) => {
                 for (var i = 0; i < result.length ; i++) { 
-                    camp_name.push(result[i].Campground_name) ;
+                    camp_name.push(result[i].Campground_name);
                     camp_id.push(result[i].Campground_id);
                     camp_location.push(result[i].Campground_location);
                 }
+                for (var i = 0; i < camp_name.length; i++) {
+                    Reservation.find({Campground_name: `${camp_name[i]}`})
+                        .then((result2) => {
+                            for (var j = 0; j < result2.length; j++) {
+                                reservation_email.push(result2[j].Reservation_email);
+                                start_date.push(result2[j].Start_date);
+                                end_date.push(result2[j].End_date);
+                                number_of_people.push(result2[j].Number_of_people);
+                                reservation_id.push(result2[j]._id);
+                            }
+                            res.render('mypage_owner', {
+                                userInfo: userInfo,
+                                camp_name: camp_name,
+                                camp_id: camp_id,
+                                camp_location: camp_location,
+                                reservation_email: reservation_email,
+                                start_date: start_date,
+                                end_date: end_date,
+                                number_of_people: number_of_people,
+                                reservation_id: reservation_id
+                            });
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                }
+                /*
                 res.render('mypage_owner', {
                     userInfo: userInfo,
                     camp_name: camp_name,
@@ -233,35 +252,11 @@ app.get('/mypage', function(req, res) {
                     end_date: end_date,
                     number_of_people: number_of_people
                 });
+                */
             })
             .catch((err) => {
                 console.log(err);
             });
-        
-        /*
-        for (var i = 0; i < camp_name.length; i++) {
-            Reservation.find({Campground_name: `${camp_name[i]}`})
-                .then((result) => {
-                    reservation_email.push(result[0].Reservation_email);
-                    start_date.push(result[0].Start_date);
-                    end_date.push(result[0].End_date);
-                    number_of_people.push(result[0].number_of_people);
-                    res.render('mypage_owner', {
-                        userInfo: userInfo,
-                        camp_name: camp_name,
-                        camp_id: camp_id,
-                        camp_location: camp_location,
-                        reservation_email: reservation_email,
-                        start_date: start_date,
-                        end_date: end_date,
-                        number_of_people: number_of_people
-                    });
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        }
-        */
     }
     // mode가 2면 관리자
     else if (userInfo.mode == 2) {
@@ -287,6 +282,7 @@ app.get('/updatemyinfo', function(req, res) {
 
 // 캠핑장 등록 및 수정 화면
 app.get('/setcampinfo', function(req, res) {
+    // id 쿼리가 존재하면 수정, 존재하지 않으면 등록입니다!
     res.render('add_and _modify_campground');
 });
 
@@ -322,12 +318,36 @@ app.get('/reservation', function(req, res) {
     res.render('reservation_page');
 });
 
-// 예약 취소
+// 예약 승인
+app.get('/approvalReservation', function(req, res) {
+    var id = req.query.id;
+    // 첫 번째 인자 -> 수정할 대상
+    // 두 번째 인자 -> 수정할 내용
+    var now = new Date();
+    Reservation.updateMany({_id: `${id}`}, {Approval_date: `${now}`}, function(err) {
+        if (err) throw err;
+        msg.info('예약 승인 성공');
+    });
+    res.redirect('/mypage');
+});
+
+// 예약 반려 및 취소
 app.get('/deleteReservation', function(req, res) {
     var id = req.query.id;
     Reservation.remove({_id: `${id}`}, function(err) {
         if (err) throw err;
-        console.log('예약 삭제 성공!');
+        msg.info('예약 취소 성공');
+    });
+    res.redirect('/mypage');
+});
+
+// 예약 체크인
+app.get('/checkinReservation', function(req, res) {
+    var id = req.query.id;
+    var now = new Date();
+    Reservation.updateMany({_id: `${id}`}, {Checkin_date: `${now}`}, function(err) {
+        if (err) throw err;
+        msg.info('예약 체크인 성공');
     });
     res.redirect('/mypage');
 });
