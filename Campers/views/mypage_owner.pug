@@ -27,6 +27,10 @@ html
                     div(style='font-size: 1em')= camp_location[camp]
                     div(style='font-size: 1em')= camp_name[camp]
                 br
+<<<<<<< HEAD
+=======
+                button(value=`${camp_id[camp]}` onclick='modify_campground_info(value)') 수정
+>>>>>>> e9e4846ff9d0b859ffd38e9530edafe18bbe13a4
                 button(value=`${camp_id[camp]}` onclick='delete_campground_info(value)') 삭제
                 br
 
@@ -34,6 +38,7 @@ html
 
             h3 예약 요청 현황
             -for (res in reservation_email)
+<<<<<<< HEAD
                 div= reservation_email[res] 
                 div= start_date[res]
                 div= end_date[res]
@@ -41,6 +46,21 @@ html
                 button(type='button') 승인
                 button(type='button') 반려
                 button(type='button') 체크인
+=======
+                label [예약자]
+                div= reservation_email[res] 
+                label [입실 날짜]
+                div= start_date[res]
+                label [퇴실 날짜]
+                div= end_date[res]
+                label [숙박 인원]
+                div= number_of_people[res]
+                button(type='button' value=`${reservation_id[res]}` onclick='approval_reservation(value)') 승인
+                button(type='button' value=`${reservation_id[res]}` onclick='delete_reservation(value)') 반려
+                button(type='button' value=`${reservation_id[res]}` onclick='checkin_reservation(value)') 체크인
+                br
+                br
+>>>>>>> e9e4846ff9d0b859ffd38e9530edafe18bbe13a4
         
         button(type="button" onclick="location.href='/logout'") 로그아웃
         br

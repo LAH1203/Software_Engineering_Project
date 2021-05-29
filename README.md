@@ -81,4 +81,4 @@
 
 #### - 설계
 > [2021-05-21](https://www.notion.so/2021-05-21-550c8a8887a74605b666e7d97024d573)
-
+> [2021-05-26](https://www.notion.so/2021-05-26-06f35e9f8b8a4bbfac03abbe68f2edc9)
