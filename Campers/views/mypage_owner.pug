@@ -27,6 +27,7 @@ html
                     div(style='font-size: 1em')= camp_location[camp]
                     div(style='font-size: 1em')= camp_name[camp]
                 br
+                button(value=`${camp_id[camp]}` onclick='modify_campground_info(value)') 수정
                 button(value=`${camp_id[camp]}` onclick='delete_campground_info(value)') 삭제
                 br
 
