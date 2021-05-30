@@ -114,7 +114,7 @@ app.post('/login', function(req, res) {
                 console.log("읍다..")
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf8'});
                 res.write('<h1>로그인 실패</h1>');
-                res.write("<br><br><a href='/'>다시 로그인하기</a>");
+                res.write("<br><br><a href='/login'>다시 로그인하기</a>");
                 res.end();
             }else {
                 dbPassword=result.Password;
@@ -431,15 +431,30 @@ app.get('/deletecampinfo', function(req, res) {
 
 // 상세정보 화면
 app.get('/camp', function(req, res) {
-    let camp_name = ['캠핑장 이름!!!'];
-    let camp_location = ['캠핑장 장소!!!'];
-    let camp_information = ['캠핑장 정보!!!'];
-    let camp_QnA = ['질문 있는 사람!!!'];
-    let camp_review = ['후기 적어줘!!!'];
+    var camp_name ='';
+    var camp_location = '';
+    var camp_information = '';
+    //let camp_image ='';
+    var camp_QnA = '큐앤에이';
+    var camp_review = '리뷰게시판';
+
+    var camp_id = req.query.camp_id;
     
-    res.render('campground', { camp_name: camp_name, camp_location: camp_location, 
-        camp_information: camp_information, camp_QnA: camp_QnA, camp_review: camp_review});
+    Campground.findOne({_id:camp_id},function(error, campgrounds){
+        if(error){
+            console.log(error);
+        } else {
+            camp_name = campgrounds.Campground_name;
+            camp_location = campgrounds.Campground_location;
+            camp_information = campgrounds.Campground_information;
+            res.render('campground', { camp_name: camp_name, camp_location: camp_location, 
+                camp_information: camp_information, camp_QnA: camp_QnA, camp_review: camp_review});
+        } 
+    });
 });
+    
+  
+
 
 // 예약 화면
 app.get('/reservation', function(req, res) {
