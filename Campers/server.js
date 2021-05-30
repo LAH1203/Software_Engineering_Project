@@ -278,7 +278,11 @@ app.get('/setqna', function(req, res) {
 
 // 내 정보 수정 화면
 app.get('/updatemyinfo', function(req, res) {
+    res.render('updatemyinfo_page');
+});
 
+app.post('/updatemyinfo', function(req, res) {
+    
 });
 
 var check= null;

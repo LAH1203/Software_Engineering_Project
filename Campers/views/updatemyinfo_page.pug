@@ -5,7 +5,7 @@ html
         title modify My Information
         script(src='/signup.js') 
     body 
-        form(name='updatemyinfo_form' action='/updatemyinfo' method='post')
+        form(name='sign_form' action='/updatemyinfo' method='post')
              -var useremail='user@naver.com'
                 img(src='' class='' style='' onclick='')
                 h2 내 정보 수정
@@ -48,4 +48,6 @@ html
                         div(class='form_text_alert_padding')
                             div(id='alter_phone' class='form_text_alter')
                     div 
-                        button(type='button' class='form_button') 수정하기
+                        button(type='button' class='form_button' onclick='signupform_check()') 수정
+                    div
+                        button(type='button' class='form_button' onclick="location.href='/mypage'") 취소
