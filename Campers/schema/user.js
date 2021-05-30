@@ -20,7 +20,7 @@ const UserSchema = new Schema({
         required:true
     },
     Mode: {
-        type: Number,
+        type: String,
         required:true
     }
 });

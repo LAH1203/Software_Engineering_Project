@@ -1,4 +1,4 @@
-  {
+{
   "dependencies": {
     "async": "^3.2.0",
     "bcrypt": "^5.0.1",

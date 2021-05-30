@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var msg = require('dialog');
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const User = require('./schema/User');
 const Campground = require('./schema/Campground');
@@ -143,10 +144,66 @@ app.get('/signup', function(req, res) {
     res.render('signup_page');
 });
 
-app.post('/signup', function(req, res) {
-    console.log('회원가입 성공');
-    res.redirect('/login');
+
+app.post('/signup', function(req, res) { 
+ 
+    //CastError: Cast to ObjectId failed for value "~~" at path "_id" for model "posts" => 왜남?????????대체 ㅇwhy???????????왜????????제발 이러지마
+    
+    const {email : email, password : init_password, name : name,  phone : phone_number,
+         usertype : mode } = req.body;      
+     /* 
+    var email = req.body.email;
+    var init_password = req.body.password;
+    var name = req.body.name;
+    var phone_number = req.body.phone;
+    var init_mode = req.body.usertype;
+*/
+    const salt = bcrypt.genSalt(10);
+    const password = bcrypt.hash(init_password, salt); //받아와서 암호화
+    var mode1 = parseInt(init_mode);
+
+    try{    
+        User.find({Email : `${email}`}, (err, userObj) => {
+            if(err) console.log(err.message);
+
+            if(userObj.length >= 1){
+                return res
+                    .status(400)
+                    .json({errors : [{ msg : "User already exists"}]})
+            }
+
+            User.create({ //생성 + save까지 한번에!
+                Email : email, 
+                Password : password,
+                Name : name,
+                Phone_number : phone_number,
+                Mode : mode1
+            }).then((result) => {
+                res.redirect('/login');
+            }).catch((err) => { console.log(err.message)});           
+
+        });
+        /*
+        User.find({Email : `${email}`}).exec()
+            .then((userObj) => {  //반환값도 promise라 casting이 안된다?
+                
+                
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+       */
+    }catch(error){
+        console.log(error.message);
+        /*
+        if(error.code === 11000){
+            return res.json({ status : 'error'});
+        }
+        */
+        //throw error;//에러 걍 넘기기          
+    }
 });
+
 
 // 마이페이지
 app.get('/mypage', function(req, res) {
@@ -282,7 +339,29 @@ app.get('/updatemyinfo', function(req, res) {
 });
 
 app.post('/updatemyinfo', function(req, res) {
-    
+    //1.현재 로그인한 사람이 누군지 정보 가져오기
+    const currentUser = req.session.email;
+    //수정할 정보 받아오기
+    const { name : name, email : email, password : password, phone: number } = req.body;
+    var password2 = req.body.password2;
+
+    User.findOne({Email : new RegExp(`${currentUser}`)})
+        .then((resultUser) => { 
+            //비밀번호 재확인, 일치하지 않으면 다시 수정 페이지 돌아가기
+            if(password2 != password){
+                console.log('password unvalid. Please Try again.');
+                res.redirect('/updatemyinfo');
+            }
+            resultUser.updateOne({Email : email, Name : name, Password : password, Phone_number : number}, 
+                (err, result) => {
+                    console.log(err.message);
+                    console.log(result);
+                });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+        
 });
 
 var check= null;
@@ -367,6 +446,37 @@ app.get('/reservation', function(req, res) {
     res.render('reservation_page');
 });
 
+app.post('/reservation', function(req, res) {
+    var startDay = req.body.startDay;
+    var EndDay = req.body.endDay;
+    var totalDay = req.body.totalDay;
+    var people = req.body.people;
+    var price = req.body.price;
+    //var campName =   ;
+    res.render('reservation_complete_page', { totalDay: totalDay, people: people, price: price });
+    /*
+    //캠핑장 이름 쿼리로 받아오기
+    const reservation = new Reservation({
+        Reservation_email = req.session.email, //현재 로그인 유저
+        //Campground_name = ,
+        Start_date = startDay,
+        End_date = EndDay, 
+        Number_of_people = people,
+        //Approval_date = " ",
+        //Checkin_date = " ",
+    });
+
+    reservation.save()
+        .then((result) => {
+            console.log('reservation write successed');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+        */
+});
+
+
 // 예약 승인
 app.get('/approvalReservation', function(req, res) {
     var id = req.query.id;
@@ -428,11 +538,4 @@ app.get('/deleteUserInfo', function(req, res) {
             res.redirect('/');
         }
     });
-});
-
-app.post('/reservation', function(req, res) {
-    var totalDay = req.body.totalDay;
-    var people = req.body.people;
-    var price = req.body.price;
-    res.render('reservation_complete_page', { totalDay: totalDay, people: people, price: price });
 });
