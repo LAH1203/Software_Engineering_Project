@@ -1,10 +1,11 @@
-//Q&A 작성화면으로 가는 함수
+/*
 function goTowamQnAPage(id) {
     var url = 'http://localhost:3000/setqna';
     var queryParams = '?id=' + id;
     var link = url + queryParams;
     location.href = link;
 }
+*/
 
 function setInformation(info) {
     let x = document.getElementsByClassName("quiz-text")[0];
@@ -27,7 +28,6 @@ function setQnA(id, qna) {
     var qnatext = document.createElement("text");
     qnatext.innerText = qna;
     x.appendChild(qnatext);
-    //x.innerText += input(type="button", value='작성하기', onclick="goTowamQnAPage(pageid)");
 }
 
 function setReview(rev) {
