@@ -325,12 +325,14 @@ app.get('/mypage', function(req, res) {
 
 // 후기 작성 및 수정 화면
 app.get('/setreview', function(req, res) {
-    res.render('write_and_modify_review');
+    var id = req.query.id;
+    res.render('write_and_modify_review', {id: `${id}`});
 });
 
 // Q&A 작성 및 수정 화면
 app.get('/setqna', function(req, res) {
-    res.render('write_and_modify_QnA');
+    var id = req.query.id;
+    res.render('write_and_modify_QnA', {id: `${id}`});
 });
 
 // 내 정보 수정 화면
