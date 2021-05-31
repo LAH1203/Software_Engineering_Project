@@ -15,8 +15,8 @@
 > [요구사항 명세서](https://github.com/LAH1203/Software_Engineering_Project/blob/main/1.%20%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%20%EB%AA%85%EC%84%B8%EC%84%9C/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%20%EB%AA%85%EC%84%B8%EC%84%9C_Campers'_ver1.6.docx)  
 > [프로젝트 계획서](https://github.com/LAH1203/Software_Engineering_Project/blob/main/2.%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B3%84%ED%9A%8D%EC%84%9C/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EA%B3%84%ED%9A%8D%EC%84%9C_Campers'_ver1.4.docx)  
 > [중간 발표영상](https://www.youtube.com/watch?v=FuaIqX4x1Fs)   
-> [중간 발표자료](https://github.com/LAH1203/Software_Engineering_Project/blob/main/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EA%B3%B5%ED%95%99_%EC%A4%91%EA%B0%84%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pdf)
-
+> [중간 발표자료](https://github.com/LAH1203/Software_Engineering_Project/blob/main/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EA%B3%B5%ED%95%99_%EC%A4%91%EA%B0%84%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pdf)  
+> [Class 설계서](https://github.com/LAH1203/Software_Engineering_Project/blob/main/3.%20Class%20%EC%84%A4%EA%B3%84%EC%84%9C/Class%EC%84%A4%EA%B3%84%EC%84%9C_Campers'_ver1.0.pptx)
 <br>
 
 ## 프로젝트 소개
@@ -52,33 +52,14 @@
 <br>
 
 ## 팀플 기록
-| :date: | :page_facing_up: | :girl: |
-|:---:|---|:---:|
-| 2021-04-02 | - 요구사항 명세서 작성<br>- 구현 기술 정하기 | 강세미, 유서정, 이아현, 임지민, 최아름 |
-| 2021-04-05 | - 요구사항 명세서 작성 | // |
-| 2021-04-08 | - 요구사항 명세서 작성 | // |
-| 2021-04-16 | - 프로젝트 계획서 작성 | // |
-| 2021-04-24 | - 중간 발표 수정 회의 | // |
-| 2021-05-21 | - 설계 회의 | // |
-| 2021-05-22 | - 설계 및 구현 회의 | // |
-| 2021-05-26 | - 구현 | // |
+| :date: | :page_facing_up: | :girl: | Notion |
+|:---:|---|:---:|:---:|
+| 2021-04-02 | - 요구사항 명세서 작성<br>- 구현 기술 정하기 | 강세미, 유서정, 이아현, 임지민, 최아름 |[2021-04-02](https://www.notion.so/2021-04-02-b29888c2bc1a4325bfeed7c2b2cbc7cf)   |
+| 2021-04-05 | - 요구사항 명세서 작성 | // |[2021-04-05](https://www.notion.so/2021-04-05-2429bf49089d4ad8bcb1691bfb918408)  |
+| 2021-04-08 | - 요구사항 명세서 작성 | // |[2021-04-08](https://www.notion.so/2021-04-08-94850c22f9054cdc9e6f4af9b93d6b43) |
+| 2021-04-16 | - 프로젝트 계획서 작성 | // |[2021-04-16](https://www.notion.so/2021-04-16-e7ce44f3e1964d5c980ecbd4b4bf11b6) |
+| 2021-04-24 | - 중간 발표 수정 회의 | // | [2021-04-24](https://www.notion.so/2021-04-24-7f2c97cc853540069f5af4711f30f8d9) |
+| 2021-05-21 | - 설계 회의 | // |[2021-05-21](https://www.notion.so/2021-05-21-550c8a8887a74605b666e7d97024d573) |
+| 2021-05-22 | - 설계 및 구현 회의 | // | |
+| 2021-05-26 | - 구현 | // |[2021-05-26](https://www.notion.so/2021-05-26-06f35e9f8b8a4bbfac03abbe68f2edc9) |
 | 2021-05-27 | - 구현 | // |
-
-<br>
-
-## Notion 회의록 정리
-
-#### - 요구사항 명세서 작성
-> [2021-04-02](https://www.notion.so/2021-04-02-b29888c2bc1a4325bfeed7c2b2cbc7cf)  
-> [2021-04-05](https://www.notion.so/2021-04-05-2429bf49089d4ad8bcb1691bfb918408)  
-> [2021-04-08](https://www.notion.so/2021-04-08-94850c22f9054cdc9e6f4af9b93d6b43)  
-
-#### - 프로젝트 계획서 작성
-> [2021-04-16](https://www.notion.so/2021-04-16-e7ce44f3e1964d5c980ecbd4b4bf11b6)  
-
-#### - 중간 발표
-> [2021-04-24](https://www.notion.so/2021-04-24-7f2c97cc853540069f5af4711f30f8d9)
-
-#### - 설계
-> [2021-05-21](https://www.notion.so/2021-05-21-550c8a8887a74605b666e7d97024d573)
-> [2021-05-26](https://www.notion.so/2021-05-26-06f35e9f8b8a4bbfac03abbe68f2edc9)
