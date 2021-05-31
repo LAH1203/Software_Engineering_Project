@@ -12,9 +12,9 @@ html
         button(type='button' value=`${id}` onclick='goToReservationPage(value)') 예약
         br
         br
-        //span.quiz-text ssssss
         input(type='button' value='정보' id=`${camp_information}` onclick="setInformation(id)")
-        input(type='button' value='Q&A' id=`${camp_QnA}` onclick="setQnA(id)")
+        button(type='button' value=`${id}` id=`${camp_QnA}` onclick="setQnA(value,id)") QnA
+        //input(type='button' value='Q&A' id=`${camp_QnA}` onclick="setQnA(id)")
         input(type='button' value='후기' id=`${camp_review}` onclick="setReview(id)")
         br
         span.quiz-text #{camp_information}
@@ -22,4 +22,4 @@ html
         //div(style='font-size: 1em')= bottom
         //input(type='button' value='정보' id="information")
         //input(type='button' value='Q&A' id="QnA")
-        //input(type='button' value='후기' id="review")        
+        //input(type='button' value='후기' id="review")      
