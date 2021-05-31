@@ -21,7 +21,7 @@ const ReviewSchema = new Schema({
             data: Buffer,
             contentType: String
         },
-        required:true
+        //required:true
     },
     Star_point: {
         type: Number,
@@ -31,10 +31,7 @@ const ReviewSchema = new Schema({
         type: String,
         required:true
     },
-    Owner_email: {
-        type: String,
-        required:true
-    },
+    
 });
 
 const Review = mongoose.model('Review', ReviewSchema);

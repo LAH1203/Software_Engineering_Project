@@ -21,7 +21,7 @@ function delete_reservation(_id) {
 }
 
 function write_review(_id) {
-    var url = 'http://localhost:3000//setreview';
+    var url = 'http://localhost:3000/setreview';
     var queryParams = '?id=' + _id;
     var link = url + queryParams;
     location.href = link;
