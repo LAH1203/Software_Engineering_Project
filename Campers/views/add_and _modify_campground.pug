@@ -4,25 +4,22 @@ html
         title 캠핑장 등록
     body
         h1 캠핑장 등록
-        form(action = "add_and_modify_campground" methoud="post")
+        form(action = "/setcampinfo" method="post")
             p 
                 h4 사진 업로드              
                 input(type="file")
             
                 h4 캠핑장 이름              
-                textarea(name="description", cols="30", rows="1")
+                textarea(name="campground_name", cols="30", rows="1")
             
-                h4 캠핑장 전화번호              
-                textarea(name="description", cols="30", rows="1")
+                //h4 캠핑장 전화번호              
+                //textarea(name="campground_num", cols="30", rows="1")
             
                 h4 캠핑장 위치            
-                textarea(name="description", cols="30", rows="1")
-            
-                h4 캠핑장 구비시설         
-                textarea(name="description", cols="30", rows="1")
-            
+                textarea(name="campground_location", cols="30", rows="1")
+
                 h4 캠핑장 상세 정보        
-                textarea(name="description", cols="30", rows="1")
+                textarea(name="campground_info", cols="30", rows="1")
             br
-            input(type='button' value='작성하기')
+            input(type='submit' value='작성하기')
             input(type='button' onclick="window.location.href = '/mypage'" value='취소하기')
