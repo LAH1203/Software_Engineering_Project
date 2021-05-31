@@ -25,11 +25,9 @@ const ReservationSchema = new Schema({
     },
     Approval_date: {
         type: Date,
-        required:true
     },
     Checkin_date: {
         type: Date,
-        required:true
     }
 });
 

@@ -147,8 +147,7 @@ app.get('/signup', function(req, res) {
 
 app.post('/signup', function(req, res) { 
  
-    //CastError: Cast to ObjectId failed for value "~~" at path "_id" for model "posts" => 왜남?????????대체 ㅇwhy???????????왜????????제발 이러지마
-    
+    //CastError: Cast to ObjectId failed for value "~~" at path "_id" for model "posts" => 왜남?????????대체 ㅇwhy???????????왜????????제발 이러지마   
     const {email : email, password : init_password, name : name,  phone : phone_number,
          usertype : mode } = req.body;      
      /* 
@@ -355,7 +354,7 @@ app.get('/updatemyinfo', function(req, res) {
 app.post('/updatemyinfo', function(req, res) {
     //1.현재 로그인한 사람이 누군지 정보 가져오기
     const currentUser = req.session.email;
-    //수정할 정보 받아오기
+
     const { name : name, email : email, password : password, phone: number } = req.body;
     var password2 = req.body.password2;
 
@@ -366,14 +365,33 @@ app.post('/updatemyinfo', function(req, res) {
                 console.log('password unvalid. Please Try again.');
                 res.redirect('/updatemyinfo');
             }
+            /*
+             //둘다 코드 돌아감 
+             User.updateMany({Email : resultUser.Email},{$set: {
+                Email : email,
+                Name : name,
+                Password : password,
+                Phone_number : number      
+            }})
+            .then((result) => {
+                console.log('success to update my info')
+                res.redirect('/main');
+            })
+            .catch((err) => {
+                res.status(400)
+                    .json({errors : [{ msg : "failed to update my info"}]})
+            })
+            */
             resultUser.updateOne({Email : email, Name : name, Password : password, Phone_number : number}, 
                 (err, result) => {
-                    console.log(err.message);
-                    console.log(result);
+                    if(err) console.log(err.message);            
+                    res.redirect('/main');
                 });
         })
         .catch((err) => {
-            console.log(err);
+            return res
+                .status(400)
+                .json({errors : [{ msg : err + "failed to update my info"}]})
         });
         
 });
@@ -461,48 +479,68 @@ app.get('/camp', function(req, res) {
             camp_name = campgrounds.Campground_name;
             camp_location = campgrounds.Campground_location;
             camp_information = campgrounds.Campground_information;
-            res.render('campground', { camp_name: camp_name, camp_location: camp_location, 
+            res.render('campground', {id : camp_id, camp_name: camp_name, camp_location: camp_location, 
                 camp_information: camp_information, camp_QnA: camp_QnA, camp_review: camp_review});
         } 
     });
 });
 
-
+var camp_Name = null;
 // 예약 화면
 app.get('/reservation', function(req, res) {
-    res.render('reservation_page');
+    //해당 캠핑장 정보 받아오기
+    var camp_Id = req.query.id;
+    var e_mail = req.session.email;
+
+    //로그인 해야지 예약 가능 추가
+    if(!e_mail){
+        res.redirect('/login');
+    }
+
+    Campground.findOne({ _id :`${camp_Id}` }, (err, result) => {
+        if(err){
+            return res
+                .status(400)
+                .json({ err : [{ msg : "campground not found"}]});
+        }
+        camp_Name = result.Campground_name;
+        res.render('reservation_page');
+    });
+
 });
 
 app.post('/reservation', function(req, res) {
+    //이메일 중복 에러 잡고 화면으로 안된다고 알림창ㄱ 
     var startDay = req.body.startDay;
     var EndDay = req.body.endDay;
     var totalDay = req.body.totalDay;
     var people = req.body.people;
     var price = req.body.price;
-    //var campName =   ;
-    res.render('reservation_complete_page', { totalDay: totalDay, people: people, price: price });
-    /*
-    //캠핑장 이름 쿼리로 받아오기
+    var campName = camp_Name;
+    var email = req.session.email;
+    var approveDay = null;
+    var checkinDay = null;
+
     const reservation = new Reservation({
-        Reservation_email = req.session.email, //현재 로그인 유저
-        //Campground_name = ,
-        Start_date = startDay,
-        End_date = EndDay, 
-        Number_of_people = people,
-        //Approval_date = " ",
-        //Checkin_date = " ",
+        Reservation_email : email, //현재 로그인 유저
+        Campground_name : campName ,
+        Start_date : startDay,
+        End_date : EndDay, 
+        Number_of_people : people,
+        Approval_date : approveDay,
+        Checkin_date : checkinDay,
     });
 
     reservation.save()
         .then((result) => {
-            console.log('reservation write successed');
+            console.log('reservation write to DB successed');
         })
         .catch((err) => {
             console.log(err);
         });
-        */
-});
 
+    res.render('reservation_complete_page', { totalDay: totalDay, people: people, price: price });      
+});
 
 // 예약 승인
 app.get('/approvalReservation', function(req, res) {
