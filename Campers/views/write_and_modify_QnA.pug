@@ -4,7 +4,9 @@ html
         title 질문 입력
     body
         h1 질문 입력
-        form(action = "write_and_modify_QnA" methoud="post")
+        form(action="/setqna" methoud="post")
+            label 캠핑장 id 
+            input(value=`${id}` readOnly)
             table(border=1)
                 tr
                     th 제목
@@ -16,5 +18,5 @@ html
                         textarea(name="description", cols="30", rows="10") 
                 tr 
             br
-            input(type='button' onclick="window.location.href = '/camp'" value='작성완료')
-            input(type='button' onclick="window.location.href = '/camp'" value='취소하기')
+            button(type='submit') 작성
+            button(type='button' onclick="location.href='/camp'") 취소

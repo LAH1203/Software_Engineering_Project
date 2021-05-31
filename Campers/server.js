@@ -329,10 +329,22 @@ app.get('/setreview', function(req, res) {
     res.render('write_and_modify_review', {id: `${id}`});
 });
 
+app.post('/setriview', function(req, res) {
+    // 여기에서 body-parser를 사용해서 후기 정보를 받아와주세요
+    // id를 쿼리로 전달하는 것보다 이게 나을 것 같아서 이 방법을 사용하였습니다.
+
+});
+
 // Q&A 작성 및 수정 화면
 app.get('/setqna', function(req, res) {
     var id = req.query.id;
     res.render('write_and_modify_QnA', {id: `${id}`});
+});
+
+app.post('/setqna', function(req, res) {
+    // 여기에서 body-parser를 사용해서 qna 정보를 받아와주세요
+    // id를 쿼리로 전달하는 것보다 이게 나을 것 같아서 이 방법을 사용하였습니다.
+
 });
 
 // 내 정보 수정 화면
@@ -454,8 +466,6 @@ app.get('/camp', function(req, res) {
         } 
     });
 });
-    
-  
 
 
 // 예약 화면

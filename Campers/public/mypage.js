@@ -20,6 +20,13 @@ function delete_reservation(_id) {
     }
 }
 
+function write_review(_id) {
+    var url = 'http://localhost:3000//setreview';
+    var queryParams = '?id=' + _id;
+    var link = url + queryParams;
+    location.href = link;
+}
+
 function checkin_reservation(_id) {
     if (confirm('체크인하시겠습니까?')) {
         var url = 'http://localhost:3000/checkinReservation';

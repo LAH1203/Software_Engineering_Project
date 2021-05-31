@@ -9,7 +9,7 @@ html
         h2 캠핑장 이미지
         div(style='font-size: 1em')= camp_location
         br
-        input(type='button' onclick="window.location.href = '/reservation'" value='예약하기')
+        button(type='button' value=`${id}` onclick='goToReservationPage(value)') 예약
         br
         br
         //span.quiz-text ssssss
