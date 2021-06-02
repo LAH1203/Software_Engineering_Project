@@ -6,6 +6,7 @@ var bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const User = require( '../schema/user');
 
+
 //로그인
 router.get('/login', function(req, res) {
     res.render('login_page')
@@ -15,7 +16,7 @@ router.post('/login', function(req, res) {
     let body = req.body;
     var dbPassword = '';
     let inputPassword = body.password;
-    //let hashPassword = crypto.createHash("sha512").update(inputPassword).digest("hex");
+
     User.findOne({Email: `${body.email}`}, function (err, result){
         if(err){
             res.send(err);
@@ -24,30 +25,30 @@ router.post('/login', function(req, res) {
                 console.log("읍다..")
                 res.writeHead(200,{'Content-Type':'text/html; charset=utf8'});
                 res.write('<h1>로그인 실패</h1>');
-                res.write("<br><br><a href='/'>다시 로그인하기</a>");
+                res.write("<br><br><a href='/login'>다시 로그인하기</a>");
                 res.end();
-            }else {
-                dbPassword=result.Password;
-                if(dbPassword === inputPassword){
-                    console.log("비밀번호 일치");
-                    // 세션 설정
-                    req.session.email = body.email;
-                    req.session.mode = result.Mode;
-                    req.session.name = result.Name;
-                    req.session.phoneNumber = result.Phone_number;
-                    res.redirect('/');
-                }else{
-                    console.log("비밀번호 불일치");
-                    console.log(dbPassword);
-                    //console.log(inputPassword);
-                    res.redirect('/login');
-                }
+            } else {
+                bcrypt.compare(inputPassword,result.Password, (error, isMatch) => {
+                    if (isMatch) {
+                        console.log("비밀번호 일치");
+                        // 세션 설정
+                        req.session.email = body.email;
+                        req.session.mode = result.Mode;
+                        req.session.name = result.Name;
+                        req.session.phoneNumber = result.Phone_number;
+                        res.redirect('/');
+                    }else{
+                        console.log("비밀번호 불일치");
+                        console.log(dbPassword);
+                        //console.log(inputPassword);
+                        res.redirect('/login');
+                    }
+                });
             }
         }
-        
     });
-    
 });
+
 
 // 로그아웃
 router.get('/logout', function(req, res) {
@@ -61,6 +62,7 @@ router.get('/logout', function(req, res) {
         }
     });
 });
+
 
 // 회원가입 화면
 router.get('/signup', function(req, res) {
