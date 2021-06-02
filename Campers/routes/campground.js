@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var msg = require('dialog');
 const Campground = require('../schema/Campground');
+const Review = require('../schema/review');
 
 // 캠핑장 등록 및 수정 화면
 router.get('/setcampinfo', function(req, res) {
@@ -70,10 +71,11 @@ router.get('/camp', function(req, res) {
     var camp_name ='';
     var camp_location = '';
     var camp_information = '';
+    //리뷰
+    let writing_content = '';
+    var star_point = '';
     //let camp_image ='';
     var camp_QnA = '큐앤에이';
-    var camp_review = '리뷰게시판';
-
     var camp_id = req.query.camp_id;
     
     Campground.findOne({_id:camp_id},function(error, campgrounds){
@@ -83,10 +85,23 @@ router.get('/camp', function(req, res) {
             camp_name = campgrounds.Campground_name;
             camp_location = campgrounds.Campground_location;
             camp_information = campgrounds.Campground_information;
-            res.render('campground', {id : camp_id, camp_name: camp_name, camp_location: camp_location, 
-                camp_information: camp_information, camp_QnA: camp_QnA, camp_review: camp_review});
+
+            console.log(camp_name);
+
+            Review.findOne({Campground_name:camp_name},function(error, result){
+                if(error){
+                    console.log(error);
+                } else {
+                    writing_content = result.Writing_content;
+                    star_point = result.Star_point;
+                    console.log(writing_content);
+                    res.render('campground', {id : camp_id, camp_name: camp_name, camp_location: camp_location, 
+                        camp_information: camp_information, camp_QnA: camp_QnA, camp_review: writing_content, star_point:star_point});
+                }
+            });
         } 
-    });
+    }); 
+    
 });
 
 

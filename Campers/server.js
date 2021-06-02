@@ -5,6 +5,13 @@ var expressSession = require('express-session');
 var msg = require('dialog');
 var mongoose = require('mongoose');
 var app = express();
+const loginRouter = require('./routes/auth');
+const mainRouter = require('./routes/main');
+const mypageRouter = require('./routes/mypage');
+const campgroundRouter = require('./routes/campground');
+const reviewRouter = require('./routes/review');
+const reservationRouter = require('./routes/reservation');
+const qnaRouter = require('./routes/qna');
 
 //connect to mongodb
 const dbUri = 'mongodb+srv://semi:1111@cluster0.r5t31.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
@@ -37,31 +44,10 @@ app.use(expressSession({
 }));
 
 
-const loginRouter = require('./routes/auth');
-const mainRouter = require('./routes/main');
-const mypageRouter = require('./routes/mypage');
-const campgroundRouter = require('./routes/campground');
-const reviewRouter = require('./routes/review');
-const reservationRouter = require('./routes/reservation');
-const qnaRouter = require('./routes/qna');
-
-
-// main
 app.use( '/',mainRouter);
-// 로그인 화면
 app.use('/',loginRouter);
-// 마이페이지
 app.use('/',mypageRouter);
-// 캠핑장
 app.use('/',campgroundRouter);
-// 리뷰
 app.use('/',reviewRouter);
-// 예약
 app.use('/',reservationRouter);
-// qna
 app.use('/',qnaRouter);
-
-
-
-
-

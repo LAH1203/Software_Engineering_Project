@@ -25,21 +25,37 @@ router.post('/setreview', function(req, res) {
     const body = req.body;
 
     const review = new Review();
-        review.Campground_name = body.camp_name;
-        review.Writing_content = body.writing_content;
-        review.Star_point = body.star_point;
-        review.Writer_email = req.session.email;
+    review.Campground_name = body.camp_name;
+    review.Writing_content = body.writing_content;
+    review.Star_point = body.star_point;
+    review.Writer_email = req.session.email;
     
-        review.save()
-        .then(newPost => {
-            console.log("Create 완료");
-            res.redirect("/mypage");
-        })
-        .catch(err => {
-            res.status(500).json({
-            message: err
-            });
+    review.save()
+    .then(newPost => {
+        console.log("Create 완료");
+        res.redirect("/mypage");
+    })
+    .catch(err => {
+        res.status(500).json({
+        message: err
         });
+    });
+});
+
+//후기 삭제
+router.get('/deletereview', function(req, res) {
+    //if (req.session.email == )
+    var review_id = req.query.id;
+    Review.remove({_id: `${review_id}`}, function(err) {
+        if (err) {
+            msg.info('캠핑장 삭제 실패');
+            res.redirect('/main');
+        }
+        else {
+            msg.info('캠핑장 삭제 성공');
+            res.redirect('/main');
+        }
+    });
 });
 
 module.exports = router;

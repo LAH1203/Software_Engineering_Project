@@ -30,8 +30,7 @@ const ReviewSchema = new Schema({
     Writing_content: {
         type: String,
         required:true
-    },
-    
+    }
 });
 
 const Review = mongoose.model('Review', ReviewSchema);

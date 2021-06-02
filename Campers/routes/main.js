@@ -14,7 +14,6 @@ router.get(['/', '/main'], function(req, res) {
         if(error){
             console.log(error);
         } else {
-
             for(var i = 0; i<campgrounds.length; i++) {
                 camp_name.push(campgrounds[i].Campground_name);
                 camp_id.push(campgrounds[i]._id);
