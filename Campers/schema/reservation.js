@@ -7,7 +7,7 @@ const ReservationSchema = new Schema({
         required:true,
         unique: true
     },
-    Campground_name: {
+    Campground_id: {
         type: String,
         required:true
     },

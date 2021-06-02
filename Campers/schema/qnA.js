@@ -2,16 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const QnASchema = new Schema({
-    QnA_id: {
-        type:Number,
-        required:true,
-        unique: true
-    },
-    Writer_email: {
+    Campground_id: {
         type: String,
         required:true
     },
-    Campground_name: {
+    Writer_email: {
         type: String,
         required:true
     },
@@ -27,6 +22,9 @@ const QnASchema = new Schema({
         type: String,
         required:true
     },
+    Comment_content: {
+        type: String,
+    }
 });
 
 //이 이름으로 database와 commnuicate, model의 이름 설정(singular of the collection name => store constants)

@@ -62,28 +62,17 @@ router.get('/logout', function(req, res) {
     });
 });
 
-
 // 회원가입 화면
 router.get('/signup', function(req, res) {
     res.render('signup_page');
 });
 
-
 router.post('/signup', function(req, res) { 
- 
-    //CastError: Cast to ObjectId failed for value "~~" at path "_id" for model "posts" => 왜남?????????대체 ㅇwhy???????????왜????????제발 이러지마   
-    const {email : email, password : init_password, name : name,  phone : phone_number,
-         usertype : mode } = req.body;      
-     /* 
     var email = req.body.email;
-    var init_password = req.body.password;
+    var password = req.body.password;
     var name = req.body.name;
     var phone_number = req.body.phone;
-    var init_mode = req.body.usertype;
-*/
-    const salt = bcrypt.genSalt(10);
-    const password = bcrypt.hash(init_password, salt); //받아와서 암호화
-    var mode1 = parseInt(init_mode);
+    var mode = req.body.usertype;
 
     try{    
         User.find({Email : `${email}`}, (err, userObj) => {
@@ -93,38 +82,49 @@ router.post('/signup', function(req, res) {
                 return res
                     .status(400)
                     .json({errors : [{ msg : "User already exists"}]})
-            }
-
-            User.create({ //생성 + save까지 한번에!
+            }         
+            user = new User({
                 Email : email, 
                 Password : password,
                 Name : name,
                 Phone_number : phone_number,
-                Mode : mode1
+                Mode : mode
+            });
+
+            const salt = bcrypt.genSaltSync(10);
+            user.Password = bcrypt.hashSync(password, salt);
+            //동기로 하니까 왜돼..???????????????????????????
+            //var password = 해시코드 하면 또 왜안돼..??..user.Password하면됌
+
+            user.save()
+                .then((result) => {
+                    res.redirect('/login');
+                    console.log("singup successd");
+                })
+                .catch((err) => {
+                    console.log(err.message);
+                })
+           //create로 하면 또 왜안돼...????????????? 주석 지우지마세용
+           /*
+            User.create({ //생성 + save까지
+                Email : email, 
+                Password : password,
+                Name : name,
+                Phone_number : phone_number,
+                Mode : mode
             }).then((result) => {
                 res.redirect('/login');
-            }).catch((err) => { console.log(err.message)});           
-
-        });
-        /*
-        User.find({Email : `${email}`}).exec()
-            .then((userObj) => {  //반환값도 promise라 casting이 안된다?
-                
-                
-            })
-            .catch((err) => {
-                console.log(err.message);
+            }).catch((err) => {
+                 console.log(err.message)
             });
-       */
+            */              
+        });
+
     }catch(error){
-        console.log(error.message);
-        /*
-        if(error.code === 11000){
-            return res.json({ status : 'error'});
-        }
-        */
-        //throw error;//에러 걍 넘기기          
+        msg.info('회원가입 실패');
+        res.redirect('/singup');                 
     }
+    
 });
 
 //회원 탈퇴
@@ -141,7 +141,5 @@ router.get('/deleteUserInfo', function(req, res) {
         }
     });
 });
-
-
 
 module.exports = router;
