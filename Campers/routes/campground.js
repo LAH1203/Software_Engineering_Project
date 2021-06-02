@@ -72,11 +72,13 @@ router.get('/camp', function(req, res) {
     var camp_location = '';
     var camp_information = '';
     //리뷰
-    let writing_content = '';
-    var star_point = '';
+    let writing_content = [];
+    var star_point = [];
     //let camp_image ='';
     var camp_QnA = '큐앤에이';
     var camp_id = req.query.camp_id;
+    var user_email = req.session.email;
+    var user_mode = req.session.mode;
     
     Campground.findOne({_id:camp_id},function(error, campgrounds){
         if(error){
@@ -86,24 +88,24 @@ router.get('/camp', function(req, res) {
             camp_location = campgrounds.Campground_location;
             camp_information = campgrounds.Campground_information;
 
-            console.log(camp_name);
-
-            Review.findOne({Campground_name:camp_name},function(error, result){
+            Review.find({Campground_name:camp_name},function(error, result){
                 if(error){
                     console.log(error);
                 } else {
-                    writing_content = result.Writing_content;
-                    star_point = result.Star_point;
-                    console.log(writing_content);
+                    for(let i = 0;  i < result.length ; i++){
+                        writing_content.push(result[i].Writing_content);
+                        star_point.push(result[i].Star_point);
+                    }
+                    console.log(writing_content)
                     res.render('campground', {id : camp_id, camp_name: camp_name, camp_location: camp_location, 
-                        camp_information: camp_information, camp_QnA: camp_QnA, camp_review: writing_content, star_point:star_point});
+                        camp_information: camp_information, camp_QnA: camp_QnA, camp_review: writing_content, star_point:star_point, 
+                        user_email: user_email, user_mode: user_mode});
                 }
             });
         } 
     }); 
-    
+   
 });
-
 
 
 module.exports = router;
