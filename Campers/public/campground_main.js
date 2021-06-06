@@ -25,14 +25,54 @@ function setQnA(id, qna) {
     }
     //btn.setAttribute("onclick","goTowamQnAPage(id)");
     x.appendChild(btn);
-    var qnatext = document.createElement("text");
-    qnatext.innerText = qna;
-    x.appendChild(qnatext);
+    var qnatext = (qna.split(','));
+
+    var modifybtn = document.createElement('input');  
+    modifybtn.type = 'button';
+    modifybtn.value = '수정';
+    
+    var deletebtn = document.createElement('input');  
+    deletebtn.type = 'button';
+    deletebtn.value = '삭제';
+
+    for (var i=0; i<qnatext.length; i++) {
+        var div = document.createElement("div");
+        div.innerHTML = qnatext[i]+modifybtn.outerHTML+deletebtn.outerHTML;
+        x.appendChild(div);
+    }
 }
 
-function setReview(rev) {
+function setReview(arr) {
     let x = document.getElementsByClassName("quiz-text")[0];
-    x.innerText=rev;
+    x.innerText='';
+    var stars = (arr.split('---')[0]).split(',');
+    var reviewtext = (arr.split('---')[1]).split(',');
+    
+    var modifybtn = document.createElement('input');  
+    modifybtn.type = 'button';
+    modifybtn.value = '수정';
+    
+    var deletebtn = document.createElement('input');  
+    deletebtn.type = 'button';
+    deletebtn.value = '삭제';
+    //btn.id="id_"+n;
+
+    //btn.appendChild(btnText);             
+    /*  
+    btn.onclick = function() { 
+        var url = 'http://localhost:3000/setreview';
+        //var queryParams = '?id=' + id;
+        //var link = url + queryParams;
+        var link = url;
+        location.href = link;
+    };
+    */
+
+    for (var i=0; i<reviewtext.length; i++) {
+        var div = document.createElement("div");
+        div.innerHTML = reviewtext[i]+stars[i]+modifybtn.outerHTML+deletebtn.outerHTML;
+        x.appendChild(div);
+    }
 }
 
 // 예약 화면으로 가는 함수

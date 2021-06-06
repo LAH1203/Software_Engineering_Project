@@ -1,3 +1,5 @@
+campground.pug
+
 doctype html 
 html
     head
@@ -14,11 +16,12 @@ html
         br
         input(type='button' value='정보' id=`${camp_information}` onclick="setInformation(id)")
         button(type='button' value=`${id}` id=`${camp_QnA}` onclick="setQnA(value,id)") QnA
-        input(type='button' value='후기' id=`${camp_review}` onclick="setReview(id)")
+        button(type='button' value=`${star_point}`+'---'+`${camp_review}` onclick="setReview(value)") 후기
         br
+        //camp_review star_point
         span.quiz-text #{camp_information}
         //div로 변수 출력할때는 div= 붙여서 쓰기
         //div(style='font-size: 1em')= bottom
         //input(type='button' value='정보' id="information")
         //input(type='button' value='Q&A' id="QnA")
-        //input(type='button' value='후기' id="review")      
+        //input(type='button' value='후기' id="review")  
