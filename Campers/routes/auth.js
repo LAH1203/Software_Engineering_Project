@@ -41,6 +41,7 @@ router.post('/login', function(req, res) {
                         console.log("비밀번호 불일치");
                         console.log(dbPassword);
                         //console.log(inputPassword);
+                        msg.info('로그인 실패');
                         res.redirect('/login');
                     }
                 });
