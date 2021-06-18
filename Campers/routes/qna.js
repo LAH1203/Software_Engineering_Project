@@ -85,4 +85,19 @@ router.post('/deleteQna', function(req,res){
 
 })
 
+// qna 삭제
+router.get('/deleteqna', function(req, res) {
+    var id = req.query.id;
+    Qna.remove({_id: `${id}`}, function(err) {
+        if (err) {
+            msg.info('Q&A 삭제 실패');
+            res.redirect('/main');
+        }
+        else {
+            msg.info('Q&A 삭제 성공');
+            res.redirect('/main');
+        }
+    });
+});
+
 module.exports = router;
