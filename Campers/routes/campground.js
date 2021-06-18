@@ -88,6 +88,7 @@ router.get('/camp', function(req, res) {
             camp_location = campgrounds.Campground_location;
             camp_information = campgrounds.Campground_information;
 
+            //후기
             Review.find({Campground_name:camp_name},function(error, result){
                 if(error){
                     console.log(error);
@@ -102,6 +103,8 @@ router.get('/camp', function(req, res) {
                         user_email: user_email, user_mode: user_mode});
                 }
             });
+
+            //qna
         } 
     }); 
    
