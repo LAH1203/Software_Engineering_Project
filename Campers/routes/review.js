@@ -48,11 +48,11 @@ router.get('/deletereview', function(req, res) {
     var review_id = req.query.id;
     Review.remove({_id: `${review_id}`}, function(err) {
         if (err) {
-            msg.info('캠핑장 삭제 실패');
+            msg.info('후기 삭제 실패');
             res.redirect('/main');
         }
         else {
-            msg.info('캠핑장 삭제 성공');
+            msg.info('후기 삭제 성공');
             res.redirect('/main');
         }
     });
