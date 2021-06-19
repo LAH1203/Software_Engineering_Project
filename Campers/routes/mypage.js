@@ -5,6 +5,8 @@ const Reservation = require('../schema/reservation');
 const Campground = require('../schema/Campground');
 const User = require( '../schema/user');
 
+
+
 // 마이페이지
 router.get('/mypage', function(req, res) {
     // 세션에 사용자 정보가 저장되어있지 않을 경우 로그인 하지 않은 상태이므로 로그인을 먼저 하도록 함
@@ -17,7 +19,6 @@ router.get('/mypage', function(req, res) {
     userInfo.email = req.session.email;
     userInfo.phoneNumber = req.session.phoneNumber;
     userInfo.mode = req.session.mode;
-
     // 고객
     if (userInfo.mode == 0) {
         var sortByDate = { Start_date : -1 };
@@ -56,7 +57,6 @@ router.get('/mypage', function(req, res) {
     }
     // 캠핑장 주인
     else if (userInfo.mode == 1) {
-
         let camp_id = [];
         let camp_name = [];
         let camp_location = [];
@@ -66,6 +66,7 @@ router.get('/mypage', function(req, res) {
         let number_of_people = [];
         let reservation_id = [];
 
+     
         Campground.find({Owner_email: `${userInfo.email}`})
             .then((result) => {
                 for (var i = 0; i < result.length ; i++) { 
@@ -111,16 +112,21 @@ router.get('/mypage', function(req, res) {
                     number_of_people: number_of_people
                 });
                 */
+                
             })
             .catch((err) => {
                 console.log(err);
             });
+            
     }
+    
     // mode가 2면 관리자
     else if (userInfo.mode == 2) {
         msg.info('관리자는 마이페이지가 존재하지 않습니다.');
         res.redirect('/');
     }
+
+ 
 });
 
 // 내 정보 수정 화면

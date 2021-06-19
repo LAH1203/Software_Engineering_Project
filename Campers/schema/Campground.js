@@ -22,12 +22,8 @@ const CampgroundSchema = new Schema({
         required:true
     },
     Campground_image: {
-        type: {
-            data: Buffer,
-            contentType: String
-        }
+        type: String
     },
-
     Owner_email: {
         type: String,
         //required:true

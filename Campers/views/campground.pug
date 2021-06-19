@@ -7,19 +7,22 @@ html
         title 캠핑장 상세정보
         script(src='/campground_main.js') 
     body
-        div(style='font-size: 3em')= camp_name
-        h2 캠핑장 이미지
-        div(style='font-size: 1em')= camp_location
-        br
-        button(type='button' value=`${id}` onclick='goToReservationPage(value)') 예약
-        br
-        br
-        input(type='button' value='정보' id=`${camp_information}` onclick="setInformation(id)")
-        button(type='button' value=`${id}` id=`${camp_QnA}` onclick="setQnA(value,id)") QnA
-        button(type='button' value=`${star_point}`+'---'+`${camp_review}` onclick="setReview(value)") 후기
-        br
+        center
+
+            div(style='font-size: 3em')= camp_name   
+            img(src=camp_image alt='campground image' width='300')
+            div(style='font-size: 1em')= camp_location
+            br
+            button(type='button' value=`${id}` onclick='goToReservationPage(value)') 예약
+            br
+            br
+            input(type='button' value='정보' id=`${camp_information}` onclick="setInformation(id)" )
+            button(type='button' value=`${id}` id=`${camp_QnA}` onclick="setQnA(value,id)") QnA
+            button(type='button' value=`${star_point}`+'---'+`${camp_review}` onclick="setReview(value)") 후기
+            br
+            span.quiz-text #{camp_information}
         //camp_review star_point
-        span.quiz-text #{camp_information}
+           
         //div로 변수 출력할때는 div= 붙여서 쓰기
         //div(style='font-size: 1em')= bottom
         //input(type='button' value='정보' id="information")

@@ -82,3 +82,17 @@ function goToReservationPage(id) {
     var link = url + queryParams;
     location.href = link;
 }
+
+/*
+function delete_review(review_id) {
+    if (confirm('삭제하시겠습니까?')) {
+        var url = 'http://localhost:3000/deleteReservation';
+        var queryParams = '?id=' + review_id;
+        var link = url + queryParams;
+        location.href = link;
+        console.log(link);
+    } else {
+        return;
+    }
+}
+*/
