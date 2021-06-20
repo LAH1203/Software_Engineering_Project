@@ -2,6 +2,7 @@ doctype html
 html
     head
         title 후기 입력
+        link(rel='stylesheet' href='/static/review.css' )
     body
          center
 
@@ -17,7 +18,7 @@ html
             h1 후기 입력
             form(action = "/setreview" method="post" enctype ="multipart/form-data")
                 label 캠핑장 이름
-                input(value=`${camp_name}` name='camp_name' readOnly)
+                input(class="test" value=`${camp_name}` name='camp_name' readOnly)
                 p
                     h3 후기 입력란
                     
@@ -28,8 +29,18 @@ html
                     input(name="reviewImage",type="file")
                 p 
                     h3 별점 
-                    
-                    input(name="star_point",type="number" min="1" max="5" step="1" value="1") 
+                    div(class="star-rating")
+                        input(type="radio" name="star_point" id="5-stars" value="5")
+                        label(for="5-stars" class="star") ★
+                        input(type="radio" name="star_point" id="4-stars" value="4")
+                        label(for="4-stars" class="star") ★
+                        input(type="radio" name="star_point" id="3-stars" value="3")
+                        label(for="3-stars" class="star") ★
+                        input(type="radio" name="star_point" id="2-stars" value="2")
+                        label(for="2-stars" class="star") ★
+                        input(type="radio" name="star_point" id="1-stars" value="1")
+                        label(for="1-stars" class="star") ★
+
 
                 button(type='submit') 작성
                 button(type='button' onclick="location.href='/mypage'") 취소
