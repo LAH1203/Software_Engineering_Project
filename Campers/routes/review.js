@@ -20,6 +20,10 @@ router.get('/setreview', function(req, res) {
         } else {
             //console.log(id);
             camp_name = result.Campground_name;
+            if(!result.Checkin_date){
+                msg.info("체크인 후 작성 가능");
+                res.redirect('/');
+            }
             res.render('write_and_modify_review', {id: `${id}`, camp_name:camp_name});
         } 
     });
@@ -39,10 +43,10 @@ var storage = multer.diskStorage({
   
 var upload = multer({ storage: storage });
 
-router.post('/setreview',upload.single('reviewImage'), function(req, res) {
+router.post('/setreview',upload.single('reviewImage'), async function(req, res) {
     // 여기에서 body-parser를 사용해서 후기 정보를 받아와주세요
     // id를 쿼리로 전달하는 것보다 이게 나을 것 같아서 이 방법을 사용하였습니다.
-    //, image : image
+
     const body = req.body;
     const review = new Review();
     review.Campground_name = body.camp_name;
@@ -77,7 +81,6 @@ router.get('/deleteReview', async function(req, res) {
         }
         else{
             review_email = review.Writer_email;
-            console.log("review_email:",review_email);
         }
     });
 

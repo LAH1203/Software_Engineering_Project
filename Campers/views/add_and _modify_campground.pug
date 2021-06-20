@@ -4,30 +4,29 @@ html
         title 캠핑장 등록
     body
         center
-
             img(src='/image/campers_logo.jpg' alt='logo title' width='100' onclick="location.href='/'")
             button(type='button' onclick="location.href='/mypage'" style='border: 0px none; background-color: transparent; float: right;')
-                    svg(xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16")
+                    svg(xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16")
                         path(d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z")
                         path(fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z")
                 
             br
 
             h1 캠핑장 등록
-            form(action = "/setcampinfo" method="post" enctype ="multipart/form-data")
-            p 
-            h4 사진 업로드              
-            input(type="file" name="campground_image")
+            form(action ="/setcampinfo" method="post" enctype ="multipart/form-data")
+                p 
+                    h4 사진 업로드              
+                    input(type="file" name="campground_image")
                 
-            h4 캠핑장 이름              
-            textarea(name="campground_name", cols="30", rows="1")
+                    h4 캠핑장 이름              
+                    textarea(name="campground_name", cols="30", rows="1")
                 
-            h4 캠핑장 위치            
-            textarea(name="campground_location", cols="30", rows="1")
+                    h4 캠핑장 위치            
+                    textarea(name="campground_location", cols="30", rows="1")
 
-            h4 캠핑장 상세 정보        
-            textarea(name="campground_info", cols="30", rows="1")
+                    h4 캠핑장 상세 정보        
+                    textarea(name="campground_info", cols="30", rows="1")
             
-            br
-            input(type='submit' value='작성하기')
-            input(type='button' onclick="window.location.href = '/mypage'" value='취소하기')
+                br
+                button(type='submit') 작성하기
+                input(type='button' onclick="window.location.href = '/mypage'" value='취소하기')

@@ -30,10 +30,10 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-router.post('/setcampinfo',upload.single('campground_image'), function(req, res){
-    const body = req.body;
+router.post('/setcampinfo', upload.single('campground_image'), function(req, res){
+    var body = req.body;
     if (check == null){
-        const campground = new Campground();
+        var campground = new Campground();
         campground.Campground_name = body.campground_name;
         campground.Campground_location = body.campground_location;
         campground.Campground_information = body.campground_info;

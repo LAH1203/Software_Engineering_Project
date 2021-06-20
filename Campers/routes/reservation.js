@@ -81,7 +81,7 @@ router.post('/reservation', function(req, res) {
 router.get('/checkinReservation', function(req, res) {
     var id = req.query.id;
     var now = new Date();
-    Reservation.updateMany({_id: `${id}`}, {Checkin_date: `${now}`}, function(err) {
+    Reservation.updateOne({_id: `${id}`}, {Checkin_date: `${now}`}, function(err) {
         if (err) throw err;
         msg.info('예약 체크인 성공');
     });
