@@ -56,7 +56,31 @@ function setReview(arr) {
     deletebtn.type = 'button';
     deletebtn.value = '삭제';
     //btn.id="id_"+n;
-
+    deletebtn.onclick=function() { 
+        if (confirm('삭제하시겠습니까?')) {
+            var url = 'http://localhost:3000/deleteReservation';
+            var queryParams = '?id=' + review_id;
+            var link = url + queryParams;
+            location.href = link;
+            console.log(link);
+        } else {
+            return;
+        }
+    };
+    /*
+    deletebtn.addEventListener('input', updateValue);
+    deletebtn.onclick = function() {
+        if (confirm('삭제하시겠습니까?')) {
+            var url = 'http://localhost:3000/deleteReservation';
+            var queryParams = '?id=' + review_id;
+            var link = url + queryParams;
+            location.href = link;
+            console.log(link);
+        } else {
+            return;
+        }
+    }
+    */
     //btn.appendChild(btnText);             
     /*  
     btn.onclick = function() { 
@@ -70,8 +94,14 @@ function setReview(arr) {
 
     for (var i=0; i<reviewtext.length; i++) {
         var div = document.createElement("div");
+        /*
         div.innerHTML = reviewtext[i]+stars[i]+modifybtn.outerHTML+deletebtn.outerHTML;
         x.appendChild(div);
+        */
+        div.innerHTML = reviewtext[i]+stars[i];
+        x.appendChild(div);
+        x.appendChild(modifybtn);
+        x.appendChild(deletebtn);
     }
 }
 
