@@ -53,6 +53,8 @@ html
                 when '2'
                     -for (i in camp_review)
                         div(class='camp-layout')
+                            div(class='camp-image')
+                                img(src=review_image[i] alt='review image' width='100')
                             div(class='camp-text')
                                 div(style='font-size: 1em')= camp_review[i] 
                                 div(style='font-size: 0.5em')= review_email[i]

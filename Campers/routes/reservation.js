@@ -98,13 +98,27 @@ router.get('/approvalReservation', function(req, res) {
 });
 
 //예약 취소
-router.get('/deleteReservation', function(req, res) {
-    var id = req.query.id;
-    Reservation.remove({_id: `${id}`}, function(err) {
-        if (err) throw err;
-        msg.info('예약 취소 성공');
-    });
-    res.redirect('/mypage');
+router.get('/deleteReservation', async function(req, res) {
+    var id = req.query.id;  
+
+    //예약의 승인이 완료되어 취소가 불가능한 경우, 취소가 불가능하다는 경고 메시지를 띄운다.
+    await Reservation.findOne({_id:id})
+    .then((result)=>{
+        if(result.Approval_date != null ){
+            msg.info("취소가 불가능합니다.");
+            res.redirect("back");
+        }
+        else{
+            Reservation.remove({_id: `${id}`}, function(err) {
+                if (err) throw err;
+                console.log(result.Approval_date);
+                msg.info('예약 취소 성공');
+            });
+            res.redirect('/mypage');
+
+        }
+    })
+  
 });
 
 module.exports = router;
