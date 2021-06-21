@@ -10,7 +10,7 @@
 > [프로젝트 계획서](https://github.com/LAH1203/Software_Engineering_Project/blob/main/2.%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B3%84%ED%9A%8D%EC%84%9C/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EA%B3%84%ED%9A%8D%EC%84%9C_Campers'_ver1.4.docx)  
 > [중간 발표영상](https://www.youtube.com/watch?v=FuaIqX4x1Fs) / [중간 발표자료](https://github.com/LAH1203/Software_Engineering_Project/blob/main/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%EA%B3%B5%ED%95%99_%EC%A4%91%EA%B0%84%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.pdf)  
 > [Class 설계서](https://github.com/LAH1203/Software_Engineering_Project/blob/main/3.%20Class%20%EC%84%A4%EA%B3%84%EC%84%9C/Class%E1%84%89%E1%85%A5%E1%86%AF%E1%84%80%E1%85%A8%E1%84%89%E1%85%A5_Campers'_ver1.0.pptx)  
-> ✨[기말 발표영상](https://www.youtube.com/watch?v=1cPh-Kf0PrY) / [기말 발표자료](https://github.com/LAH1203/Software_Engineering_Project/blob/main/%E1%84%89%E1%85%A9%E1%84%91%E1%85%B3%E1%84%90%E1%85%B3%E1%84%8B%E1%85%B0%E1%84%8B%E1%85%A5%E1%84%80%E1%85%A9%E1%86%BC%E1%84%92%E1%85%A1%E1%86%A8_%E1%84%80%E1%85%B5%E1%84%86%E1%85%A1%E1%86%AF%E1%84%87%E1%85%A1%E1%86%AF%E1%84%91%E1%85%AD%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD.pptx)
+> ✨[기말 발표영상](https://www.youtube.com/watch?v=1cPh-Kf0PrY) / [기말 발표자료](https://github.com/LAH1203/Software_Engineering_Project/tree/main/4.%20%EA%B8%B0%EB%A7%90%20%EB%B0%9C%ED%91%9C)
 <br>
 
 ## 프로젝트 소개
