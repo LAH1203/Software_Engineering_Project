@@ -20,7 +20,7 @@ router.get('/setreview', function(req, res) {
         if(result){
             if(!result.Checkin_date){
                 msg.info("체크인 후 작성 가능");
-                res.redirect('/');
+                res.redirect('/mypage');
             }
             else{
                 camp_name = result.Campground_name;
@@ -36,7 +36,7 @@ router.get('/setreview', function(req, res) {
             }
             else{
                 msg.info("작성자만 수정가능");
-                res.redirect('/');
+                res.redirect('back');
             }
         })
     }
@@ -126,13 +126,13 @@ router.get('/deleteReview', async function(req, res) {
                     }
                     else {
                         msg.info('후기 삭제 성공');
-                        res.redirect('/main');
+                        res.redirect('back');
                     }
                 });
             } 
             else {
                 msg.info('작성자만 삭제 가능');
-                res.redirect('/main');
+                res.redirect('back');
             }
     })
      

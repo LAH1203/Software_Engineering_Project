@@ -19,7 +19,6 @@
 }
 
 .camp-layout{
-	margin-top: 0px;
 	border-right: 0px none;
     border-left: 0px none;
     border-top:1px solid #dcdcdc;
@@ -36,6 +35,9 @@
     font-size: 17px;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+.camp-image{
+	flex:0.4
 }
 
 .camp-star{
