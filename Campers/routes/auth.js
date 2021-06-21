@@ -98,7 +98,6 @@ router.post('/signup', function(req, res) {
             user.Password = bcrypt.hashSync(password, salt);
             //동기로 하니까 왜돼..???????????????????????????
             //var password = 해시코드 하면 또 왜안돼..??..user.Password하면됌
-
             user.save()
                 .then((result) => {
                     res.redirect('/login');

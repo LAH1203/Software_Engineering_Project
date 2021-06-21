@@ -30,7 +30,7 @@ function write_review(_id) {
 function checkin_reservation(_id) {
     if (confirm('체크인하시겠습니까?')) {
         var url = 'http://localhost:3000/checkinReservation';
-        var queryParams = '?id=' + id;
+        var queryParams = '?id=' + _id;
         var link = url + queryParams;
         location.href = link;
     } else {

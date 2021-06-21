@@ -4,7 +4,12 @@ html
         title 마이페이지
         script(src='/mypage.js') 
     body
-        h1 마이페이지
+
+        center
+            img(src='/image/campers_logo.jpg' alt='logo title' width='150' onclick="location.href='/'")
+            
+            br
+            h1 마이페이지
             h3 내 정보
             label [이름]
             p= userInfo.name
@@ -38,7 +43,7 @@ html
             br
             hr
         
-        button(type="button" onclick="location.href='/logout'") 로그아웃
-        br
-        br
-        button(type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴
+            button(type="button" onclick="location.href='/logout'") 로그아웃
+            br
+            br
+            button(type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴

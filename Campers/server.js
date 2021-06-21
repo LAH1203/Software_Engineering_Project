@@ -12,6 +12,7 @@ const campgroundRouter = require('./routes/campground');
 const reviewRouter = require('./routes/review');
 const reservationRouter = require('./routes/reservation');
 const qnaRouter = require('./routes/qna');
+const Qna = require('./schema/QnA');
 
 //connect to mongodb
 const dbUri = 'mongodb+srv://semi:1111@cluster0.r5t31.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
@@ -51,3 +52,5 @@ app.use('/',campgroundRouter);
 app.use('/',reviewRouter);
 app.use('/',reservationRouter);
 app.use('/',qnaRouter);
+
+//MongoError: E11000 duplicate key error collection: myFirstDatabase.qnas index: QnA_id_1 dup key: { QnA_id: null } ㅅㅄㅄㅄㅄㅄㅂㅂ

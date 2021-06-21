@@ -17,11 +17,7 @@ const ReviewSchema = new Schema({
         required:true
     },
     Image: {
-        type:{
-            data: Buffer,
-            contentType: String
-        },
-        //required:true
+        type:String
     },
     Star_point: {
         type: Number,

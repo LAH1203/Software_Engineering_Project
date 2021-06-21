@@ -3,6 +3,7 @@ html
     head
         meta(charset = 'utf-8')
         title Login
+        link(rel='stylesheet' href='/static/main.css')
     body 
         form(name='login_form' action='/login' method='post')
             center
@@ -25,7 +26,11 @@ html
                     div(class='form_text_alter_padding')
                         div(id='alter_password' class='form_text_alter')
                 div
-                    button(type='submit' class='form_button') 로그인
+
+                    br
+
+                    button(class='basic-button' type='submit' class='form_button') 로그인
+                    
                 div(style='height: 10px;')
                 div
-                    button(type='button' class='form_button' onclick="location.href='/signup'") 회원가입
+                    button(class='basic-button' type='button' class='form_button' onclick="location.href='/signup'") 회원가입

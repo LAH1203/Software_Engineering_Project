@@ -3,6 +3,7 @@ var router = express.Router();
 var msg = require('dialog');
 const Reservation = require('../schema/reservation');
 const Campground = require('../schema/Campground');
+const User = require('../schema/user');
 
 
 //예약
@@ -12,11 +13,21 @@ router.get('/reservation', function(req, res) {
     var camp_Id = req.query.id;
     var e_mail = req.session.email;
 
-    //로그인 해야지 예약 가능 추가
+    //로그인 해야지 예약 가능 추가 
     if(!e_mail){
         res.redirect('/login');
+    }else{
+        //캠핑장 주인은 예약 불가능 추가
+        User.findOne({Email : `${e_mail}`}, (err, resultUser) => {
+            if(err){console.log(err);}
+    
+            var mode = resultUser.Mode;
+            if(mode == 1){
+                res.redirect('/mypage');
+            }
+        });
     }
-
+  
     Campground.findOne({ _id :`${camp_Id}` }, (err, result) => {
         if(err){
             return res
@@ -66,7 +77,7 @@ router.post('/reservation', function(req, res) {
 router.get('/checkinReservation', function(req, res) {
     var id = req.query.id;
     var now = new Date();
-    Reservation.updateMany({_id: `${id}`}, {Checkin_date: `${now}`}, function(err) {
+    Reservation.updateOne({_id: `${id}`}, {Checkin_date: `${now}`}, function(err) {
         if (err) throw err;
         msg.info('예약 체크인 성공');
     });

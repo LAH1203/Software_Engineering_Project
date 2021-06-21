@@ -4,12 +4,13 @@ html
         meta(charset='utf-8')
         title Campers
         script(src='/main.js') 
+        link(rel='stylesheet' href='/static/main.css')
     body 
         form(name='main_form' action='/main' method='post')
             center
-                img(src='/image/logo.png' alt='logo title' width='500' onclick="location.href='/'")
+                img(src='/image/logo.png' alt='logo title' width='330' onclick="location.href='/'")
                 button(type='button' onclick="location.href='/mypage'" style='border: 0px none; background-color: transparent; float: right;')
-                    svg(xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16")
+                    svg(xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16")
                         path(d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z")
                         path(fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z")
             
@@ -23,7 +24,7 @@ html
                     option 강원권
                     option 전라권
                 input(type='text' name='search' placeholder='내용을 입력해주세요')
-                button(type='submit') 검색하기
+                button(class='basic-button' type='submit') 검색하기
 
                 br
 
@@ -33,12 +34,20 @@ html
                 label 이름순
 
                 br
+            
 
                 div(data-role='content')
                     ul(data-role='campList')
                         -for (camp in camp_name)
-                            button(type='button' value=`${camp_id[camp]}` onclick='goToCampgroundPage(value)' style='border: 0px none; background-color: transparent;')
-                                div(style='font-size: 1em')= camp_location[camp]
-                                div(style='font-size: 1em')= camp_name[camp]
+                            button(class='camp-layout' type='button' value=`${camp_id[camp]}` onclick='goToCampgroundPage(value)')
+                                div(class='camp-text')
+                                    img(src='/image/location.png' height='20' width='20')
+                                    span(style='font-size: 1em')= camp_location[camp]
+                                    br
+                                    br
+                                    div(class= "camp-title" style='font-size: 1em')= camp_name[camp]
+                                div(class='camp-star')
+                                    div(style='color:#fc0') ★
+                                    //span(style='font-size: 1em')= star_point[camp]
                             br
                             br
