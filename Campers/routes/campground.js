@@ -5,6 +5,7 @@ var multer = require('multer');
 const path = require("path");
 const Campground = require('../schema/Campground');
 const Review = require('../schema/review');
+const Qna = require('../schema/QnA');
 
 router.use(express.json());
 
@@ -102,7 +103,6 @@ router.get('/camp', function(req, res) {
     var camp_id = req.query.camp_id;
     var user_email = req.session.email;
     var user_mode = req.session.mode;
-
     
     Campground.findOne({_id:camp_id},function(error, campgrounds){
         if(error){            
@@ -129,8 +129,23 @@ router.get('/camp', function(req, res) {
                         user_email: user_email, user_mode: user_mode,review_id : review_id, review_imgae:review_image});
                 }
             });
+        
+           //qna
+            Qna.find({_id : camp_id}, function(error, qnaResult){
+                if(error){
+                    console.log(error);
+                }else{
+                    for(let i = 0; i < qnaResult.length ; i++){
+                        qna_content.push(qnaResult[i].Writing_content);   //질문 내용
+                        qna_comment.push(qnaResult[i].Comment_content);   //댓글 
+                    }
+                    console.log(qna_content);
+                    res.render('campground', {QnA_text : qna_content}); //
 
-            //qna
+                    
+                }
+            });
+            
         } 
     }); 
 

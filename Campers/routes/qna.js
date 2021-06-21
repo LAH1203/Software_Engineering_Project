@@ -47,24 +47,17 @@ router.post('/setqna', function(req, res) {
         Comment_content : comment_content
     });
     qna.save()
-        .then((result)=>{console.log(result);})
-        .catch((err) => {console.log(err);});
-    /*
-    QnA.create({
-        Campground_id : campId,
-        Writer_email : email,
-        Writing_date : date,
-        Public_check : check,
-        Writing_content : write_content,
-        Comment_content : comment_content
-    }).then((result) => {
-        console.log('qna into db successed');
-    }).catch((err) => {
-        console.log(err);
-        msg.info('qna 작성 실패');
-    });
-*/
+        .then((result)=>{
+            msg.info("QnA 작성 성공");
+            console.log("QnA save to database successed");
+        })
+        .catch((err) => {
+            msg.info('QnA 작성 실패');
+            console.log(err);
+        });
+ 
     //qna 수정
+ 
 
 });
 

@@ -13,25 +13,21 @@ router.get('/reservation', function(req, res) {
     var camp_Id = req.query.id;
     var e_mail = req.session.email;
 
-    //로그인 해야지 예약 가능 추가
+    //로그인 해야지 예약 가능 추가 
     if(!e_mail){
         res.redirect('/login');
+    }else{
+        //캠핑장 주인은 예약 불가능 추가
+        User.findOne({Email : `${e_mail}`}, (err, resultUser) => {
+            if(err){console.log(err);}
+    
+            var mode = resultUser.Mode;
+            if(mode == 1){
+                res.redirect('/mypage');
+            }
+        });
     }
-
-     //캠핑장 주인은 예약 불가능 추가
-    User.findOne({Email : `${e_mail}`}, (err, resultUser) => {
-        if(err){console.log(err);}
-
-        var mode = resultUser.Mode;
-        if(mode == 1){
-            res.redirect('/mypage');
-        }
-    });
-
-    //자기 캠핑장 예약 불가능 추가 => 내가 등록한 캠핑장이랑 현재 캠핑장이란 같은지 check하기..ㅁ
-    //if()
-
-
+  
     Campground.findOne({ _id :`${camp_Id}` }, (err, result) => {
         if(err){
             return res
