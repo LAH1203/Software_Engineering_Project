@@ -92,8 +92,7 @@ router.post('/signup', function(req, res) {
 
             const salt = bcrypt.genSaltSync(10);
             user.Password = bcrypt.hashSync(password, salt);
-            //동기로 하니까 왜돼..???????????????????????????
-            //var password = 해시코드 하면 또 왜안돼..??..user.Password하면됌
+
             user.save()
                 .then((result) => {
                     res.redirect('/login');
@@ -102,20 +101,7 @@ router.post('/signup', function(req, res) {
                 .catch((err) => {
                     console.log(err.message);
                 })
-           //create로 하면 또 왜안돼...????????????? 주석 지우지마세용
-           /*
-            User.create({ //생성 + save까지
-                Email : email, 
-                Password : password,
-                Name : name,
-                Phone_number : phone_number,
-                Mode : mode
-            }).then((result) => {
-                res.redirect('/login');
-            }).catch((err) => {
-                 console.log(err.message)
-            });
-            */              
+            
         });
 
     }catch(error){

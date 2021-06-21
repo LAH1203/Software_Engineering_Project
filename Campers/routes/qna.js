@@ -92,9 +92,9 @@ router.get('/deleteQna', function(req,res){
     
     QnA.findOne({_id : `${qna_Id}` })
     .then((resultQna) => {
-        qna_email = resultQna.Writeremail;
+        qna_email = resultQna.Writer_email;
 
-        if((req.session.email == qna_email && req.session.mode == 3)){
+        if((req.session.email == qna_email || req.session.mode == 3)){
             QnA.remove({_id : `${qna_Id}`}, (err)=>{
                 if(err){
                     msg.info("qna 삭제 실패");
@@ -105,11 +105,23 @@ router.get('/deleteQna', function(req,res){
                 }
             })
         }else{
-            msg.info("접근 가능한 권한이 없습니다");
+            msg.info("접근 가능한 권한이 없습니다.");
             res.redirect('/main');
         }
     })
 
+});
+
+//답변 작성 후 출력
+router.post('/setanswer', function(req,res){
+    var answer = req.body.answer;  
+    
+    QnA.findByIdAndUpdate({_id : qna_id}, {Comment_content : answer}, (err,result)=>{
+        if(err){ console.log(err);}
+        console.log('database success');
+        res.redirect('/main');
+    });
+   
 });
 
 module.exports = router;

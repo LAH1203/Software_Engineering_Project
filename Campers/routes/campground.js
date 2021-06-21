@@ -13,7 +13,6 @@ router.use(express.json());
 router.get('/setcampinfo', function(req, res) {
     // id 쿼리가 존재하면 수정, 존재하지 않으면 등록입니다!
     res.render('add_and _modify_campground');
-    //console.log('get',req.query.id);
     check = req.query.id;
 });
 

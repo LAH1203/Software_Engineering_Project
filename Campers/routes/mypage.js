@@ -101,19 +101,7 @@ router.get('/mypage', function(req, res) {
                             console.log(err);
                         });
                 }
-                /*
-                res.render('mypage_owner', {
-                    userInfo: userInfo,
-                    camp_name: camp_name,
-                    camp_id: camp_id,
-                    camp_location: camp_location,
-                    reservation_email: reservation_email,
-                    start_date: start_date,
-                    end_date: end_date,
-                    number_of_people: number_of_people
-                });
-                */
-                
+            
             })
             .catch((err) => {
                 console.log(err);
@@ -152,23 +140,6 @@ router.post('/updatemyinfo', function(req, res) {
                 const salt = bcrypt.genSaltSync(10);
                 password = bcrypt.hashSync(password, salt);
             }
-            /*
-             //둘다 코드 돌아감 
-             User.updateMany({Email : resultUser.Email},{$set: {
-                Email : email,
-                Name : name,
-                Password : password,
-                Phone_number : number      
-            }})
-            .then((result) => {
-                console.log('success to update my info')
-                res.redirect('/main');
-            })
-            .catch((err) => {
-                res.status(400)
-                    .json({errors : [{ msg : "failed to update my info"}]})
-            })
-            */
 
             req.session.name=name;
             req.session.phoneNumber=number;

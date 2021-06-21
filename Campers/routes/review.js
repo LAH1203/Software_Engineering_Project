@@ -58,8 +58,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 router.post('/setreview',upload.single('reviewImage'), async function(req, res) {
-    // 여기에서 body-parser를 사용해서 후기 정보를 받아와주세요
-    // id를 쿼리로 전달하는 것보다 이게 나을 것 같아서 이 방법을 사용하였습니다.
+
     var body = req.body;
     var file = req.file;
 
