@@ -36,6 +36,8 @@ function setQnA(id, qna) {
     deletebtn.value = '삭제';
 
     for (var i=0; i<qnatext.length; i++) {
+        modifybtn.id = i;
+        deletebtn.id = i;
         var div = document.createElement("div");
         div.innerHTML = qnatext[i]+modifybtn.outerHTML+deletebtn.outerHTML;
         x.appendChild(div);
@@ -80,5 +82,35 @@ function goToReservationPage(id) {
     var url = 'http://localhost:3000/reservation';
     var queryParams = '?id=' + id;
     var link = url + queryParams;
+    location.href = link;
+}
+
+function c1(id) {
+    let link = 'http://localhost:3000/camp?camp_id=' + id + '&check=' + 0;
+    location.href = link;
+}
+function c2(id) {
+    let link = 'http://localhost:3000/camp?camp_id=' + id + '&check=' + 1;
+    location.href = link;
+}
+function c3(id) {
+    let link = 'http://localhost:3000/camp?camp_id=' + id + '&check=' + 2;
+    location.href = link;
+}
+
+function modifyQnA(id) {
+    let link = 'http://localhost:3000/setqna?id=' + id;
+    location.href = link;
+}
+function deleteQnA(id) {
+    let link = 'http://localhost:3000/deleteqna?id=' + id;
+    location.href = link;
+}
+function modifyReview(id) {
+    let link = 'http://localhost:3000/setreview?id=' + id;
+    location.href = link;
+}
+function deleteReview(id) {
+    let link = 'http://localhost:3000/deletereview?id=' + id;
     location.href = link;
 }

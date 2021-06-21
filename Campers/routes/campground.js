@@ -74,12 +74,15 @@ router.get('/camp', function(req, res) {
     //리뷰
     let writing_content = [];
     var star_point = [];
+    var review_id = [];
+    var qna_id = [];
     //let camp_image ='';
     var camp_QnA = '큐앤에이';
     var camp_id = req.query.camp_id;
     var user_email = req.session.email;
     var user_mode = req.session.mode;
-    
+    var check = req.query.check;
+
     Campground.findOne({_id:camp_id},function(error, campgrounds){
         if(error){
             console.log(error);
@@ -95,11 +98,12 @@ router.get('/camp', function(req, res) {
                     for(let i = 0;  i < result.length ; i++){
                         writing_content.push(result[i].Writing_content);
                         star_point.push(result[i].Star_point);
+                        review_id.push(result[i]._id);
                     }
                     console.log(writing_content)
                     res.render('campground', {id : camp_id, camp_name: camp_name, camp_location: camp_location, 
                         camp_information: camp_information, camp_QnA: camp_QnA, camp_review: writing_content, star_point:star_point, 
-                        user_email: user_email, user_mode: user_mode});
+                        qna_id: qna_id, review_id: review_id, user_email: user_email, user_mode: user_mode, check: check});
                 }
             });
         } 

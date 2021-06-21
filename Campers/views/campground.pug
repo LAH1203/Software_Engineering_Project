@@ -14,14 +14,30 @@ html
         button(type='button' value=`${id}` onclick='goToReservationPage(value)') 예약
         br
         br
-        input(type='button' value='정보' id=`${camp_information}` onclick="setInformation(id)")
-        button(type='button' value=`${id}` id=`${camp_QnA}` onclick="setQnA(value,id)") QnA
-        button(type='button' value=`${star_point}`+'---'+`${camp_review}` onclick="setReview(value)") 후기
+        -var check = check;
+        button(type='button' value=`${id}` onclick='c1(value)') 정보
+        button(type='button' value=`${id}` onclick='c2(value)') QnA
+        button(type='button' value=`${id}` onclick='c3(value)') 후기
         br
-        //camp_review star_point
-        span.quiz-text #{camp_information}
-        //div로 변수 출력할때는 div= 붙여서 쓰기
-        //div(style='font-size: 1em')= bottom
-        //input(type='button' value='정보' id="information")
-        //input(type='button' value='Q&A' id="QnA")
-        //input(type='button' value='후기' id="review")  
+        hr
+        case check
+            when '0'
+                div= camp_information
+            when '1'
+                -for (i in camp_QnA)
+                    p [내용]
+                    div= camp_QnA[i]
+                    button(type='button' value=`${qna_id[i]}` onclick='modifyQnA(value)') 수정
+                    button(type='button' value=`${qna_id[i]}` onclick='deleteQnA(value)') 삭제
+                    br
+                    br
+            when '2'
+                -for (i in camp_review)
+                    p [내용]
+                    div= camp_review[i] 
+                    p [별점]
+                    div= star_point[i] 
+                    button(type='button' value=`${review_id[i]}` onclick='modifyReview(value)') 수정
+                    button(type='button' value=`${review_id[i]}` onclick='deleteReview(value)') 삭제
+                    br
+                    br
