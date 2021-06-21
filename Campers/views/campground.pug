@@ -24,6 +24,7 @@ html
             when '0'
                 div= camp_information
             when '1'
+                button(type='button' value=`${id}` onclick='writeQnA(value)') 작성
                 -for (i in camp_QnA)
                     p [내용]
                     div= camp_QnA[i]

@@ -98,6 +98,10 @@ function c3(id) {
     location.href = link;
 }
 
+function writeQnA(id) {
+    let link = 'http://localhost:3000/setqna?camp_id=' + id;
+    location.href = link;
+}
 function modifyQnA(id) {
     let link = 'http://localhost:3000/setqna?id=' + id;
     location.href = link;
