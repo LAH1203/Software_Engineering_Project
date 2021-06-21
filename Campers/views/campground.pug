@@ -46,6 +46,9 @@ html
                         button(type='button' value=`${qna_id[i]}` onclick='modifyQnA(value)') 수정
                         button(type='button' value=`${qna_id[i]}` onclick='deleteQnA(value)') 삭제
                         br
+                        p 답변
+                        textarea(name="answer", cols="30", rows="2")
+                        button(type='submit') 작성
                         br
                 when '2'
                     -for (i in camp_review)
