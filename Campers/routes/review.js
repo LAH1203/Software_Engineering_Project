@@ -14,8 +14,6 @@ router.get('/setreview', function(req, res) {
     if (!req.session.name) {
         res.redirect('/login');
     }
-
-    //check_Mode= check(req.query.id);
   
     Reservation.findOne({_id:id})
     .then((result)=>{
@@ -111,24 +109,7 @@ router.post('/setreview',upload.single('reviewImage'), async function(req, res) 
     });
 });  
 
-    
 
-//수정, 추가 구분 함수
-async function check(id){
-    await Reservation.findOne({_id:id})
-    .then((result)=>{
-        if(result){
-            return result;
-        }
-    })
-
-    Review.findOne({_id:id})
-    .then((result)=>{
-        if(result){
-            return result;
-        }
-    })
-}
 //후기 삭제
 router.get('/deleteReview', async function(req, res) {
     var review_email;

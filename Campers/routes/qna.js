@@ -3,94 +3,113 @@ var router = express.Router();
 var msg = require('dialog');
 const QnA = require('../schema/QnA');
 const Campground = require('../schema/Campground');
-const Qna = require('../schema/QnA');
+
 
 // Q&A 작성 및 수정 화면
-var id = null;
+var camp_id = null;
+var qna_id = null;
 router.get('/setqna', function(req, res) {
 
-    var Email = req.session.email;
-    //로그인 안했으면 퇴출당해야지
-    if(!Email){
+    //로그인 안했으면 퇴출
+    if(!req.session.email){
         res.redirect('/login');
+    }else{       
+        camp_id = req.query.camp_id;  
+        if(camp_id == null){
+            qna_id = req.query.id;
+            QnA.findOne({_id : `${qna_id}`}, (result) => {
+                var camp = result.Campground_id;
+                Campground.findOne({_id :`${camp}` },(result) => {
+                    res.render('write_and_modify_QnA', {name: `${result.Campground_name}`});
+                });       
+            });
+        }else{
+            Campground.findOne( {_id :`${camp_id}`}, (err, campResult) => {
+                if(err) { console.log(err);}
+        
+                var camp_name = campResult.Campground_name;
+                res.render('write_and_modify_QnA', {name: `${camp_name}`});
+            });
+        }     
     }
-
-    id = req.query.id;  //id로 이름 찾아서 화면에 내보내기
-    Campground.findOne( {_id :`${id}`}, (err, campResult) => {
-        if(err) { console.log(err);}
-
-        var camp_name = campResult.Campground_name;
-        res.render('write_and_modify_QnA', {name: `${camp_name}`});
-    });
     
 });
 
 router.post('/setqna', function(req, res) {
-    // 여기에서 body-parser를 사용해서 qna 정보를 받아와주세요 => id
-    // id를 쿼리로 전달하는 것보다 이게 나을 것 같아서 이 방법을 사용하였습니다.
-    //1.qna 등록하고 수정을 같이 해야지..버튼에 value(모드) 전달해서, Qna.Update로 해주기(수정 버튼이면)
 
-     // id 쿼리가 존재하면 수정, 존재하지 않으면 등록입니다!
     var email = req.session.email;
     var date = new Date(); //현재시각
     var check = false; //기본값 false
     var write_content = req.body.description;
     var comment_content = null;
-    var campId = id;
- 
-    var qna = new Qna({
-        Campground_id : campId,
-        Writer_email : email,
-        Writing_date : date,
-        Public_check : check,
-        Writing_content : write_content,
-        Comment_content : comment_content
-    });
-    qna.save()
-        .then((result)=>{
-            msg.info("QnA 작성 성공");
-            console.log("QnA save to database successed");
+    var campId = camp_id;
+
+    //camp_id가 존재하면 작성
+    if(camp_id != null){  
+        var qna = new QnA({
+            Campground_id : campId,
+            Writer_email : email,
+            Writing_date : date,
+            Public_check : check,
+            Writing_content : write_content,
+            Comment_content : comment_content
+        });
+        qna.save()
+            .then((result)=>{
+                msg.info("QnA 작성 성공");
+                console.log("QnA save to database successed");
+                res.redirect('/main');
+            })
+            .catch((err) => {
+                msg.info('QnA 작성 실패');
+                console.log(err);
+                res.redirect('/main');
+            });    
+    }else{
+        //camp_id가 존재하지 않으면 수정, 자기가 쓴 경우에만 수정 가능하게
+        QnA.updateMany({_id : qna_id}, {$set: {
+            Writing_date : date,
+            Writing_content : write_content
+        }})
+        .then((result) => {
+            msg.info('QnA 수정 완료');
+            res.redirect('/main');
         })
         .catch((err) => {
-            msg.info('QnA 작성 실패');
-            console.log(err);
+            res.status(500).json({
+                message: err
+            });
         });
- 
-    //qna 수정
- 
-
+    }
 });
 
+//QnA 삭제
+router.get('/deleteQna', function(req,res){
+ 
+    //본인과 관리자만 삭제 가능하게!
+    var qna_email;
+    var qna_Id = req.query.id;
+    
+    QnA.findOne({_id : `${qna_Id}` })
+    .then((resultQna) => {
+        qna_email = resultQna.Writeremail;
 
-router.post('/deleteQna', function(req,res){
-    //qna _id받아와서 삭제..
-    var qna_id = req.query.id;
-    Qna.remove({_id : `${qna_id}`}, (req, res) => {
-        if (err) {
-            msg.info('qna 삭제 실패');
-            res.redirect('/camp');
-        }
-        else {
-            msg.info('qna 삭제 성공');
-            res.redirect('/camp');
-        }
-    });
-
-})
-
-// qna 삭제
-router.get('/deleteqna', function(req, res) {
-    var id = req.query.id;
-    Qna.remove({_id: `${id}`}, function(err) {
-        if (err) {
-            msg.info('Q&A 삭제 실패');
+        if((req.session.email == qna_email && req.session.mode == 3)){
+            QnA.remove({_id : `${qna_Id}`}, (err)=>{
+                if(err){
+                    msg.info("qna 삭제 실패");
+                    res.redirect('/main');
+                }else{
+                    msg.info("qna 삭제 성공");
+                    res.redirect('/main');
+                }
+            })
+        }else{
+            msg.info("접근 가능한 권한이 없습니다");
             res.redirect('/main');
         }
-        else {
-            msg.info('Q&A 삭제 성공');
-            res.redirect('/main');
-        }
-    });
+    })
+
 });
 
 module.exports = router;
