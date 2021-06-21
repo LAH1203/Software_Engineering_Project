@@ -4,6 +4,8 @@ html
         title 마이페이지
         script(src='/main.js') 
         script(src='/mypage.js')
+        link(rel='stylesheet' href='/static/main.css')
+        link(rel='stylesheet' href='/static/mypage.css')
     body
 
     center
@@ -14,49 +16,61 @@ html
 
         h1 마이페이지
             h3 내 정보
-            label [이름]
-            p= userInfo.name
-            label [이메일]
-            p= userInfo.email 
-            label [번호]
-            p= userInfo.phoneNumber
-            input(type='button' value='수정' onclick="location.href='/updatemyinfo'")
+            div(class = 'mypage-layout')
+                label(class='mypage-font')  [이름]&nbsp;
+                p=userInfo.name
+            div(class = 'mypage-layout')
+                label(class='mypage-font')  [이메일]&nbsp;
+                p= userInfo.email 
+            div(class = 'mypage-layout')
+                label(class='mypage-font')  [번호]&nbsp;
+                p= userInfo.phoneNumber
+            input(class='basic-button' type='button' value='수정' onclick="location.href='/updatemyinfo'")
             br
             br
 
             hr
 
             h3 내 캠핑장 목록
-            input(type='button' onclick="location.href='/setcampinfo'" value='등록')
+            input(class='basic-button' type='button' onclick="location.href='/setcampinfo'" value='등록')
+            br
             br
             -for (camp in camp_name)
-                button(value=`${_id[camp]}` onclick='goToCampgroundPage(value)' style='border: 0px none; background-color: transparent;')
-                    div(style='font-size: 1em')= camp_location[camp]
-                    div(style='font-size: 1em')= camp_name[camp]
-                br
-                button(value=`${_id[camp]}` onclick='modify_campground_info(value)') 수정
-                button(value=`${_id[camp]}` onclick='delete_campground_info(value)') 삭제
-                br
+                div(class = 'reservation-layout')
+                    button(class = 'campground-detail' value=`${_id[camp]}` onclick='goToCampgroundPage(value)' style='border: 0px none; background-color: transparent;')
+                        div(style='font-size: 1em')= camp_location[camp]
+                        div(style='font-size: 1em')= camp_name[camp]
+                    br
+                    div(class='reservation-detail')
+                        button(class='basic-button' value=`${_id[camp]}` onclick='modify_campground_info(value)') 수정
+                        button(class='basic-button' value=`${_id[camp]}` onclick='delete_campground_info(value)') 삭제
+                    br
 
             hr
 
             h3 예약 요청 현황
             -for (res in reservation_email)
-                label [예약자]
-                div= reservation_email[res] 
-                label [입실 날짜]
-                div= start_date[res]
-                label [퇴실 날짜]
-                div= end_date[res]
-                label [숙박 인원]
-                div= number_of_people[res]
-                button(type='button' value=`${reservation_id[res]}` onclick='approval_reservation(value)') 승인
-                button(type='button' value=`${reservation_id[res]}` onclick='delete_reservation(value)') 반려
-                button(type='button' value=`${reservation_id[res]}` onclick='checkin_reservation(value)') 체크인
+                div(class = 'reservation-layout')
+                    div(class='reservation-detail-layout')
+                        label(class='mypage-font') [예약자]&nbsp;
+                        div= reservation_email[res] 
+                    div(class='reservation-detail-layout')
+                        label(class='mypage-font') [입실 날짜]&nbsp;
+                        div= start_date[res]
+                    div(class='reservation-detail-layout')
+                        label(class='mypage-font') [퇴실 날짜]&nbsp;
+                        div= end_date[res]
+                    div(class='reservation-detail-layout')
+                        label(class='mypage-font') [숙박 인원]&nbsp;
+                        div= number_of_people[res]
+                    div(class='reservation-detail-layout')
+                        button(class='basic-button' type='button' value=`${reservation_id[res]}` onclick='approval_reservation(value)') 승인
+                        button(class='basic-button' type='button' value=`${reservation_id[res]}` onclick='delete_reservation(value)') 반려
+                        button(class='basic-button' type='button' value=`${reservation_id[res]}` onclick='checkin_reservation(value)') 체크인
                 br
                 br
 
-            button(type="button" onclick="location.href='/logout'") 로그아웃
+            button(class='basic-button' type="button" onclick="location.href='/logout'") 로그아웃
             br
             br
-            button(type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴
+            button(class='basic-button' type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴

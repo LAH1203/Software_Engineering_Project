@@ -4,53 +4,55 @@ html
         meta(charset='utf-8')
         title Sign Up 
         script(src='/signup.js')
+        link(rel='stylesheet' href='/static/main.css')
     body 
         form(name='sign_form' action='/signup' method='post')
-             
-            img(src='' class='' style='' onclick='')
-            h2 회원가입
-            hr
-            div(style='height : 10px;')
-            div 
+
+            center 
+                
+                h2 회원가입
+                hr
+                div(style='height : 10px;')
                 div 
-                    a(class='form_item_name') 이름
+                    div 
+                        a(class='form_item_name') 이름
+                    div 
+                        input(type='text'  name='name' placeholder='Enter name' class='form_input')
+                    div(class='form_text_alert_padding')
+                        div(id='alter_name' class='form_text_alter')
                 div 
-                    input(type='text'  name='name' placeholder='Enter name' class='form_input')
-                div(class='form_text_alert_padding')
-                     div(id='alter_name' class='form_text_alter')
-            div 
+                    div 
+                        a(class='form_item_name') 이메일
+                    div 
+                        input(type ='text'  name='email' placeholder='Enter E-mail' class='form_input')
+                    div(class = 'form_text_alter_padding')
+                        div(id='alert_email' class='form_text_alter')
                 div 
-                    a(class='form_item_name') 이메일
+                    div
+                        a(class='form_item_name') 비밀번호
+                    div 
+                        input(type='password'  name='password' placeholder='Enter password' calss='form_input')
+                    div(class='form_text_alter_padding')
+                        div(id='alter_password' class='form_text_alter')
                 div 
-                     input(type ='text'  name='email' placeholder='Enter E-mail' class='form_input')
-                div(class = 'form_text_alter_padding')
-                    div(id='alert_email' class='form_text_alter')
-            div 
+                    div 
+                        a(class='form_item_name') 비밀번호 확인 
+                    div 
+                        input(type='password' name='password2' placeholder='Confirm password' class='form_input')
+                    div(class='form_text_alter_padding')
+                        div(id='alert_confirmpassword' class='form_text_alert')
+                div 
+                    div 
+                        a(class='form_item_name') 전화번호
+                    div 
+                        input(type='number'  name='phone' placeholder='Enter phone number' class='form_input')
+                    div(class='form_text_alert_padding')
+                        div(id='alter_phone' class='form_text_alter')
+                        
                 div
-                    a(class='form_item_name') 비밀번호
+                    input(type='radio' name='usertype' value = '0' checked='checked')
+                    label 일반 회원
+                    input(type='radio' name='usertype' value = '1')
+                    label 캠핑장 주인
                 div 
-                    input(type='password'  name='password' placeholder='Enter password' calss='form_input')
-                div(class='form_text_alter_padding')
-                    div(id='alter_password' class='form_text_alter')
-            div 
-                div 
-                    a(class='form_item_name') 비밀번호 확인 
-                div 
-                    input(type='password' name='password2' placeholder='Confirm password' class='form_input')
-                div(class='form_text_alter_padding')
-                    div(id='alert_confirmpassword' class='form_text_alert')
-            div 
-                div 
-                    a(class='form_item_name') 전화번호
-                div 
-                    input(type='number'  name='phone' placeholder='Enter phone number' class='form_input')
-                div(class='form_text_alert_padding')
-                    div(id='alter_phone' class='form_text_alter')
-                    
-            div
-                input(type='radio' name='usertype' value = '0' checked='checked')
-                label 일반 회원
-                input(type='radio' name='usertype' value = '1')
-                label 캠핑장 주인
-            div 
-                button(type='button' class='form_button' onclick = 'signupform_check()') 회원가입
+                    button(class='basic-button' type='button' class='form_button' onclick = 'signupform_check()') 회원가입

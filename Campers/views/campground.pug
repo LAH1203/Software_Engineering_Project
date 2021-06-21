@@ -6,39 +6,52 @@ html
         meta(charset='utf-8')
         title 캠핑장 상세정보
         script(src='/campground_main.js') 
+        link(rel='stylesheet' href='/static/campground.css')
     body
-        div(style='font-size: 3em')= camp_name
-        h2 캠핑장 이미지
-        div(style='font-size: 1em')= camp_location
-        br
-        button(type='button' value=`${id}` onclick='goToReservationPage(value)') 예약
-        br
-        br
-        -var check = check;
-        button(type='button' value=`${id}` onclick='c1(value)') 정보
-        button(type='button' value=`${id}` onclick='c2(value)') QnA
-        button(type='button' value=`${id}` onclick='c3(value)') 후기
-        br
-        hr
-        case check
-            when '0'
-                div= camp_information
-            when '1'
-                button(type='button' value=`${id}` onclick='writeQnA(value)') 작성
-                -for (i in camp_QnA)
-                    p [내용]
-                    div= camp_QnA[i]
-                    button(type='button' value=`${qna_id[i]}` onclick='modifyQnA(value)') 수정
-                    button(type='button' value=`${qna_id[i]}` onclick='deleteQnA(value)') 삭제
-                    br
-                    br
-            when '2'
-                -for (i in camp_review)
-                    p [내용]
-                    div= camp_review[i] 
-                    p [별점]
-                    div= star_point[i] 
-                    button(type='button' value=`${review_id[i]}` onclick='modifyReview(value)') 수정
-                    button(type='button' value=`${review_id[i]}` onclick='deleteReview(value)') 삭제
-                    br
-                    br
+        center
+            img(src='/image/campers_logo.jpg' alt='logo title' width='150' onclick="location.href='/'")
+            button(type='button' onclick="location.href='/mypage'" style='border: 0px none; background-color: transparent; float: right;')
+                svg(xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16")
+                    path(d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z")
+                    path(fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z")
+   
+            div(onClick="window.location.reload()" class="title-font")= camp_name   
+            br
+            img(src=camp_image alt='campground image' width='300')
+            br
+            br
+            img(src='/image/location.png' height='20' width='20')
+            span(style='font-size: 1em')= camp_location
+            br
+            br
+            button(class="reservation-Button" type='button' value=`${id}` onclick='goToReservationPage(value)') 예약
+            br
+            br
+            -var check = check;
+            button(class="menu-Button" type='button' value=`${id}` onclick='c1(value)') 정보
+            button(class="menu-Button" type='button' value=`${id}` onclick='c2(value)') QnA
+            button(class="menu-Button" type='button' value=`${id}` onclick='c3(value)') 후기
+            br
+            hr
+            case check
+                when '0'
+                    div= camp_information
+                when '1'
+                    button(type='button' value=`${id}` onclick='writeQnA(value)') 작성
+                    -for (i in camp_QnA)
+                        p [내용]
+                        div= camp_QnA[i]
+                        button(type='button' value=`${qna_id[i]}` onclick='modifyQnA(value)') 수정
+                        button(type='button' value=`${qna_id[i]}` onclick='deleteQnA(value)') 삭제
+                        br
+                        br
+                when '2'
+                    -for (i in camp_review)
+                        p [내용]
+                        div= camp_review[i] 
+                        p [별점]
+                        div= star_point[i] 
+                        button(type='button' value=`${review_id[i]}` onclick='modifyReview(value)') 수정
+                        button(type='button' value=`${review_id[i]}` onclick='deleteReview(value)') 삭제
+                        br
+                        br

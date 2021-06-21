@@ -84,7 +84,7 @@ router.get('/deleteReview', async function(req, res) {
         }
     });
 
-    if(req.session.email == review_email){
+    if(req.session.email == review_email||req.session.mode == 3){
         Review.remove({_id:`${review_id}`}, function(err) {
             if (err) {
                 msg.info('후기 삭제 실패');

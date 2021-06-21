@@ -22,11 +22,7 @@ router.post('/login', function(req, res) {
             res.send(err);
         } else {
             if (result == null){
-                console.log("읍다..")
-                res.writeHead(200,{'Content-Type':'text/html; charset=utf8'});
-                res.write('<h1>로그인 실패</h1>');
-                res.write("<br><br><a href='/login'>다시 로그인하기</a>");
-                res.end();
+                msg.info('로그인 실패');
             } else {
                 bcrypt.compare(inputPassword,result.Password, (error, isMatch) => {
                     if (isMatch) {

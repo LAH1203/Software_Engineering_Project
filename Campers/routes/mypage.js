@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var msg = require('dialog');
+var bcrypt = require('bcrypt');
 const Reservation = require('../schema/reservation');
 const Campground = require('../schema/Campground');
 const User = require( '../schema/user');
@@ -131,14 +132,14 @@ router.get('/mypage', function(req, res) {
 
 // 내 정보 수정 화면
 router.get('/updatemyinfo', function(req, res) {
-    res.render('updatemyinfo_page');
+    res.render('updatemyinfo_page',{useremail:req.session.email});
 });
 
 router.post('/updatemyinfo', function(req, res) {
     //1.현재 로그인한 사람이 누군지 정보 가져오기
     const currentUser = req.session.email;
 
-    const { name : name, email : email, password : password, phone: number } = req.body;
+    var { name : name, email : email, password : password, phone: number } = req.body;
     var password2 = req.body.password2;
 
     User.findOne({Email : new RegExp(`${currentUser}`)})
@@ -147,6 +148,9 @@ router.post('/updatemyinfo', function(req, res) {
             if(password2 != password){
                 console.log('password unvalid. Please Try again.');
                 res.redirect('/updatemyinfo');
+            }else{
+                const salt = bcrypt.genSaltSync(10);
+                password = bcrypt.hashSync(password, salt);
             }
             /*
              //둘다 코드 돌아감 
@@ -165,10 +169,14 @@ router.post('/updatemyinfo', function(req, res) {
                     .json({errors : [{ msg : "failed to update my info"}]})
             })
             */
+
+            req.session.name=name;
+            req.session.phoneNumber=number;
+            
             resultUser.updateOne({Email : email, Name : name, Password : password, Phone_number : number}, 
                 (err, result) => {
                     if(err) console.log(err.message);            
-                    res.redirect('/main');
+                    res.redirect('/mypage');
                 });
         })
         .catch((err) => {

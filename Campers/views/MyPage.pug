@@ -3,6 +3,8 @@ html
     head
         title 마이페이지
         script(src='/mypage.js') 
+        link(rel='stylesheet' href='/static/mypage.css')
+        link(rel='stylesheet' href='/static/main.css')
     body
 
         center
@@ -11,13 +13,16 @@ html
             br
             h1 마이페이지
             h3 내 정보
-            label [이름]
-            p= userInfo.name
-            label [이메일]
-            p= userInfo.email 
-            label [번호]
-            p= userInfo.phoneNumber
-            input(type='button' value='수정' onclick="location.href='/updatemyinfo'")
+            div(class = 'mypage-layout')
+                label(class='mypage-font')  [이름]&nbsp;
+                p=userInfo.name
+            div(class = 'mypage-layout')
+                label(class='mypage-font')  [이메일]&nbsp;
+                p= userInfo.email 
+            div(class = 'mypage-layout')
+                label(class='mypage-font')  [번호]&nbsp;
+                p= userInfo.phoneNumber
+            input(class='basic-button' type='button' value='수정' onclick="location.href='/updatemyinfo'")
             br
             br
 
@@ -25,25 +30,32 @@ html
             
             h3 예약 내역
             -for (camp in campgroundName)
-                label [캠핑장 이름]
-                p= campgroundName[camp] 
-                label [입실 날짜]
-                p= startDate[camp]
-                label [퇴실 날짜]
-                p= endDate[camp]
-                label [승인 날짜]
-                p= approvalDate[camp]
-                label [체크인 날짜]
-                p= checkinDate[camp]
-                img(src='/image/icon-kakao.png')
-                button(type='button' value=`${_id[camp]}` onclick='delete_reservation(value)') 예약 취소
-                button(type='button' value=`${_id[camp]}` onclick='write_review(value)') 후기 작성
+                div(class = 'reservation-layout')
+                    div(class='reservation-detail-layout')
+                        label(class='mypage-font') [캠핑장 이름]&nbsp;
+                        p= campgroundName[camp] 
+                    div(class='reservation-detail-layout')
+                        label(class='mypage-font')  [입실 날짜]&nbsp;
+                        p= startDate[camp]
+                    div(class='reservation-detail-layout')
+                        label(class='mypage-font')  [퇴실 날짜]&nbsp;
+                        p= endDate[camp]
+                    div(class='reservation-detail-layout')
+                        label(class='mypage-font')  [승인 날짜]&nbsp;
+                        p= approvalDate[camp]
+                    div(class='reservation-detail-layout')
+                        label(class='mypage-font')  [체크인 날짜]&nbsp;
+                        p= checkinDate[camp]
+                    div(class='reservation-detail-layout')
+                        img(src='/image/icon-kakao.png')
+                        button(class='basic-button' type='button' value=`${_id[camp]}` onclick='delete_reservation(value)') 예약 취소
+                        button(class='basic-button' type='button' value=`${_id[camp]}` onclick='write_review(value)') 후기 작성
                 br
                 br
             br
             hr
         
-            button(type="button" onclick="location.href='/logout'") 로그아웃
+            button(class='basic-button' type="button" onclick="location.href='/logout'") 로그아웃
             br
             br
-            button(type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴
+            button(class='basic-button' type="button" value=`${userInfo.email}` onclick='delete_user_info(value)') 회원탈퇴

@@ -1,0 +1,47 @@
+.mypage-layout{
+	border-right: 0px none;
+    border-left: 0px none;
+    border-top:1px solid #dcdcdc;
+    border-bottom:1px solid #dcdcdc;
+    background-color: transparent;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 auto;
+    
+}
+
+.reservation-layout{
+	border-right: 0px none;
+    border-left: 0px none;
+    border-top:1px solid #dcdcdc;
+    border-bottom:1px solid #dcdcdc;
+    background-color: transparent;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.reservation-detail-layout{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.reservation-detail{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 100px;
+}
+
+.mypage-font{
+    font-weight: bolder;
+}
+
+.campground-detail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
