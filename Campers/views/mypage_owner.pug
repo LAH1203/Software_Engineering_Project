@@ -41,7 +41,7 @@ html
                         div(style='font-size: 1em')= camp_location[camp]
                         div(style='font-size: 1em')= camp_name[camp]
                     br
-                    div(class='reservation-detail')
+                    div(class='reservation-detail-layout')
                         button(class='basic-button' value=`${_id[camp]}` onclick='modify_campground_info(value)') 수정
                         button(class='basic-button' value=`${_id[camp]}` onclick='delete_campground_info(value)') 삭제
                     br

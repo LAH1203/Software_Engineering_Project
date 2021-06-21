@@ -65,7 +65,7 @@ async function calculateStar(camp_name){
                 for(var j=0; j<reviews.length; j++){
                     sum +=reviews[j].Star_point;
                 }
-                star_point.push(sum/reviews.length);
+                star_point.push((sum/reviews.length).toFixed(2));
             }
         })
     }

@@ -98,7 +98,9 @@ router.get('/camp', function(req, res) {
     var review_id = [];
     var review_image = [];
     var qna_id = [];
+    var review_email =[];
     //let camp_image ='';
+    
     var camp_QnA = '큐앤에이';
     var camp_id = req.query.camp_id;
     var user_email = req.session.email;
@@ -123,11 +125,12 @@ router.get('/camp', function(req, res) {
                         star_point.push(result[i].Star_point);
                         review_id.push(result[i]._id);
                         review_image.push(result[i].Imgae);
+                        review_email.push(result[i].Writer_email);
                     }
                     console.log(writing_content)
                     res.render('campground', {id : camp_id, camp_name: camp_name, camp_location: camp_location, 
                         camp_information: camp_information, camp_QnA: camp_QnA, camp_review: writing_content, star_point:star_point, 
-                        qna_id: qna_id, review_id: review_id, user_email: user_email, user_mode: user_mode, check: check, camp_image:camp_image, review_imgae:review_image});
+                        qna_id: qna_id, review_id: review_id, user_email: user_email, user_mode: user_mode, check: check, camp_image:camp_image, review_imgae:review_image,review_email:review_email});
                 }
             });
         } 
